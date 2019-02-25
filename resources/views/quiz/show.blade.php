@@ -1,21 +1,27 @@
 @extends('layout.app')
 
 @section('content')
-    <a href="/posts" class="btn btn-default">Go Back</a>
-    <h1>{{$post->title}}</h1>
+   
+    <h1>{{$quiz->title}}</h1>
     <div>
-        {!!$post->body!!}
+
+        <p>{{$quiz->category}}</p>
+
+        {{--  {!!$post->body!!}  --}}
     </div>
     <hr>
    
         
  
-    <small>Written on {{$post->created_at}} by {{$post->user->name}}</small>
+    <small>Written on {{$quiz->created_at}} by {{$quiz->user->name}}</small>
+    <hr>
+
+    <a href="/quizzes" class="btn btn-primary">Go Back</a>
     @if (!Auth::guest())
-        @if(Auth::user()->id == $post->user_id)
+        @if(Auth::user()->id == $quiz->user_id)
         <hr>
-                <a href="/posts/{{$post->id}}/edit" class="btn btn-default">Edit</a>
-                {!!Form::open(['action' => ['PostsController@destroy', $post->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
+                <a href="/quizzes/{{$quiz->id}}/edit" class="btn btn-default">Edit</a>
+                {!!Form::open(['action' => ['QuizzesController@destroy', $quiz->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                     {{Form::hidden('_method', 'DELETE')}}
                     {{Form::submit('Delete', ['class' => 'btn btn-danger'])}}
                 {!!Form::close()!!}

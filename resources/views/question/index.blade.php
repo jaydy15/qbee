@@ -5,7 +5,7 @@
     <a href="/questions/create" class="btn btn-default">Add Question</a>
     @if(count($questions) > 0)
 
-        @foreach($questions->quizzes as $question)
+        @foreach($questions as $question)
             <div class="card">
                 <div class="row">
                     <div class="col-md-8 col-sm-8">

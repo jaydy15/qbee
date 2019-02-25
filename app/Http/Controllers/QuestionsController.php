@@ -19,8 +19,9 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-         $questions = Question::orderby('id','desc')->paginate(10);
-        return view('question.index')-> with('questions',$questions);
+        $quiz_id = auth()->user()->quiz()->id;
+        $user = User::find($quiz_id);
+        return view('question.index')-> with('questions',$quiz_id);
     }
 
     /**

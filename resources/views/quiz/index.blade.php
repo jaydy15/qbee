@@ -5,8 +5,6 @@
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
-                <div class="card-header">Dashboard</div>
-
                 <div class="panel-body">
                     <a href="/quizzes/create" class="btn btn-info">Create Quiz</a>
                     <h3>Your Quizzes</h3>
@@ -24,7 +22,7 @@
                                     <td>{{$quiz->title}}</td>
                                     <td><a href="/quizzes/{{$quiz->id}}/edit" class="btn btn-primary">Edit</a></td>
                                     <td></td>
-                                    <td><a href="/quizzes/{{$quiz->id}}/show" class="btn btn-secondary">Show</a></td>
+                                    <td><a href="/quizzes/{{$quiz->id}}" class="btn btn-secondary">Show</a></td>
                                     <td>
                                         {!!Form::open(['action' => ['QuizzesController@destroy', $quiz->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                                             {{Form::hidden('_method', 'DELETE')}}

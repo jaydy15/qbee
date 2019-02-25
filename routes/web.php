@@ -14,6 +14,7 @@
 Route::get('/', 'PagesController@index');
 
 Route::resource('quizzes', 'QuizzesController');
+Route::view('/quizzes/{{$quiz->id}}/show', 'show');
 Route::resource('questions', 'QuestionsController');
 
 Auth::routes();

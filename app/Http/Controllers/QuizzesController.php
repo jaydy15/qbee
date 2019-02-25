@@ -65,7 +65,7 @@ class QuizzesController extends Controller
         $quiz->user_id = auth()->user()->id;
         $quiz ->save();
 
-        return redirect('/questions');
+        return redirect('/quizzes');
     }
 
     /**
@@ -77,8 +77,7 @@ class QuizzesController extends Controller
     public function show($id)
     {
         $quiz = Quiz::find($id);
-        $questions = Question::orderby('id','desc')->paginate(10);
-        return view('question.index')-> with('questions',$questions);
+        return view('quiz.show')->with('quiz', $quiz);
     }
 
     /**
@@ -148,6 +147,14 @@ class QuizzesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $quiz = Quiz::find($id);
+        //check for correct user
+        if(auth()->user()->id !==$quiz->user_id)
+        {
+            return redirect('/quizzes')->with('error', 'Unauthorized Page');
+        }
+        $quiz-> delete();
+        
+        return redirect('/quizzes')->with('success', 'Post Removed');
     }
 }

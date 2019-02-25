@@ -10,9 +10,14 @@
         <div class="form-group">
             {{Form::label('category','Category')}}
             {{Form::select('category', 
-            ['Animals' => 'Animals', 
-            'Science' => 'Science',
-            'Math' => 'Math',
+            ['General Knowledge' => 'General Knowledge', 
+            'Geography/Places' => 'Geography/Places',
+            'History Quizzes' => 'History Quizzes',
+            'Science/Nature Quizzes' => 'Science/Nature Quizzes',
+            'Art and Literature' => 'Art and Literature',
+            'Mathematics' => 'Mathematics',
+            'Technologies' => 'Technologies',
+            'Other' => 'Other'
 
             ], 
 
