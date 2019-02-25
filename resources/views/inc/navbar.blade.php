@@ -13,17 +13,17 @@
               <li class="nav-item">
                 <a class="nav-link" href="/quizzes">Quizzes</a>
               </li>
-              <li class="nav-item">
+              {{--  <li class="nav-item">
                     <a class="nav-link" href="/services">Services</a>
               </li>
               <li class="nav-item">
                   <a class="nav-link" href="/posts">Blogs</a>
-            </li> 
+            </li>   --}}
             </ul>
             <ul class="nav navbar-nav nav-right">
-               <li class="nav-item">
+               {{--  <li class="nav-item">
                     <a class="nav-link" href="/posts/create">Create Post</a>
-              </li>  
+              </li>    --}}
             
               @if (Auth::guest())
               <li class="nav-item"><a class="nav-link" href="{{ route('login') }}">Login</a></li>

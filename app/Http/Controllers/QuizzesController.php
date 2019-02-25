@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Quiz;
+use App\User;
 use App\Question;
 
 class QuizzesController extends Controller
@@ -26,8 +27,10 @@ class QuizzesController extends Controller
      */
     public function index()
     {
-        $quizzes = Quiz::orderby('id','desc')->paginate(10);
-        return view('quiz.index')-> with('quizzes',$quizzes);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+     
+        return view('quiz.index')->with('quizzes', $user->posts);
     }
 
     /**
@@ -86,7 +89,15 @@ class QuizzesController extends Controller
      */
     public function edit($id)
     {
-        //
+        $quiz = Quiz::find($id);
+
+        //check for correct user
+        if(auth()->user()->id !==$quiz->user_id)
+        {
+            return redirect('/quizzes')->with('error', 'Unauthorized Page');
+        }
+
+        return view('quiz.edit')->with('quiz', $quiz);
     }
 
     /**
@@ -98,7 +109,35 @@ class QuizzesController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $this->validate($request, [
+            'title' => 'required',
+            'category' => 'required'
+        ]);
+
+        // Handle File Upload
+        if($request->hasFile('cover_image')){
+        // Get filename with the extension
+        $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
+        // Get just filename
+        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
+        // Get just ext
+        $extension = $request->file('cover_image')->getClientOriginalExtension();
+        // Filename to store
+        $fileNameToStore= $filename.'_'.time().'.'.$extension;
+        // Upload Image
+        $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
+    }
+
+        // Create Post
+        $quiz = Quiz::find($id);
+        $quiz->title = $request->input('title');
+        $quiz->category = $request->input('category');
+        if($request->hasFile('cover_image')){
+            $quiz->cover_image = $fileNameToStore;
+        }
+        $quiz->save();
+
+        return redirect('/quizzes')->with('success', 'Post Updated');
     }
 
     /**

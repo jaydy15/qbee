@@ -57,7 +57,7 @@ class QuestionsController extends Controller
         $question ->time_limit = $request -> input('time_limit');
         // $question->quiz_id = Quizzes()->id;
         $quiz = Quiz::find($id);
-        DB::table('questions')->where('id', $quiz->id)->update(['quiz_id' => $quiez->id]);
+        DB::table('questions')->where('id', $quiz->id)->update(['quiz_id' => $quiz->id]);
         
         // $question->quiz_id = $quiz->id;
         $question ->save();

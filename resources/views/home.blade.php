@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+    <h3>Welcome to MyQbee {{auth()->user()->name}}</h3>
+
+</div>
+<div class="container">
     <div class="row">
         <div class="col-md-8 col-md-offset-2">
             <div class="card">
