@@ -1,6 +1,4 @@
-@extends('layout.app')
 
-@section('content')
     <h1>Create Question</h1>
     {!! Form::open(['action' => 'QuestionsController@store', 'method'=>'POST', 'enctype'=>'multipart/data']) !!}
         <div class="form-group">
@@ -10,12 +8,12 @@
 
         <div class="form-group">
             {{Form::label('question_type','Question Type')}}
-            {{Form::select('question_type', 
-            ['mc' => 'Multiple Choice', 
+            {{Form::select('question_type',
+            ['mc' => 'Multiple Choice',
             'tf' => 'True or False',
             'shan' => 'Short Answer',
 
-            ], 
+            ],
 
 
             null, ['class'=> 'form-control' ,'placeholder' => ''])}}
@@ -33,6 +31,6 @@
 
 
 
-        {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
+        
     {!! Form::close() !!}
-@endsection
+

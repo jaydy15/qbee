@@ -6,11 +6,12 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Question;
 use App\Quiz;
+use App\User;
 
 
 class QuestionsController extends Controller
 {
-    
+
 
     /**
      * Display a listing of the resource.
@@ -19,9 +20,13 @@ class QuestionsController extends Controller
      */
     public function index()
     {
-        $quiz_id = auth()->user()->quiz()->id;
-        $user = User::find($quiz_id);
-        return view('question.index')-> with('questions',$quiz_id);
+        $user_id = auth()->user()->id;
+        $user = User::find($user_id);
+
+
+        $quiz = Quiz::find($quiz_id);
+
+        return view('question.index')->with('questions', $user->questions);
     }
 
     /**
@@ -29,9 +34,11 @@ class QuestionsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function create()
+    public function create($id)
     {
-        return view('question.create');
+        $user_id = auth()->user()->id;
+        $quizzes = DB::table('quizzes')->where('user_id', '=', $user_id)->get();
+        return view('question.create')->with('quizzes', $quizzes);
     }
 
     /**
@@ -40,9 +47,9 @@ class QuestionsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(Request $request, $id)
     {
-       
+
         $this-> validate($request, [
             'question'=>'required',
             'question_type'=> 'required',
@@ -56,14 +63,15 @@ class QuestionsController extends Controller
         $question ->question_type = $request -> input('question_type');
         $question ->points = $request -> input('points');
         $question ->time_limit = $request -> input('time_limit');
-        // $question->quiz_id = Quizzes()->id;
+        $question ->user_id = auth()->user()->id;
+
         $quiz = Quiz::find($id);
-        DB::table('questions')->where('id', $quiz->id)->update(['quiz_id' => $quiz->id]);
-        
-        // $question->quiz_id = $quiz->id;
+        $question ->quiz_id = $quiz ->id;
+        //$question->quiz_id = $id;
+
         $question ->save();
 
-        return redirect('/questions');
+        return redirect("/quizzes/{$id}");
     }
 
     /**
@@ -74,7 +82,7 @@ class QuestionsController extends Controller
      */
     public function show($id)
     {
-        
+
     }
 
     /**

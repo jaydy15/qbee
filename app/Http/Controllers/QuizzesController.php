@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use App\Quiz;
 use App\User;
 use App\Question;
@@ -77,7 +78,8 @@ class QuizzesController extends Controller
     public function show($id)
     {
         $quiz = Quiz::find($id);
-        return view('quiz.show')->with('quiz', $quiz);
+        $questions = DB::table('questions')->where('quiz_id', '=', $id)->get();
+        return view('quiz.show')->with('quiz', $quiz)->with('questions',$questions);
     }
 
     /**
