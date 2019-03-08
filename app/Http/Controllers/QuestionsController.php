@@ -63,6 +63,14 @@ class QuestionsController extends Controller
         $question ->question_type = $request -> input('question_type');
         $question ->points = $request -> input('points');
         $question ->time_limit = $request -> input('time_limit');
+
+        $question ->choice1 = $request -> input('choice1');
+        $question ->choice2 = $request -> input('choice2');
+        $question ->choice3 = $request -> input('choice3');
+        $question ->choice4 = $request -> input('choice4');
+
+        $question ->short_answer = $request -> input('short_answer');
+
         $question ->user_id = auth()->user()->id;
 
         $quiz = Quiz::find($id);

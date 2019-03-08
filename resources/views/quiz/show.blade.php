@@ -42,27 +42,40 @@
 
                             <div class="form-group">
                                 <label for="question_type">Question Type</label>
-                                <select class="form-control" id="question_type" name="question_type">
+                                <select class="form-control" id="question_type" name="question_type" onchange="onChange">
                                     <option selected="selected" value=""></option>
-                                    <option value="mc"><a href="#multipleChoice">Multiple Choice</option>
+                                    <option value="mc">Multiple Choice</option>
                                     <option value="tf">True or False</option>
                                     <option value="shan">Short Answer</option>
                                 </select>
                             </div>
 
-                            <form class="" id="multipleChoice" type="hidden">
-                                <label for="question">Choice 1</label>
+                            <!-- hidden div for select -->
+
+                            <div class="mc box" style="display: none;">
+                                <label for="choice1">Choice 1</label>
                                 <input class="form-control" placeholder="Choice 1" name="choice1" type="text" value="" id="choice1">
 
-                                <label for="question">Choice 2</label>
+                                <label for="choice2">Choice 2</label>
                                 <input class="form-control" placeholder="Choice 2" name="choice2" type="text" value="" id="choice2">
 
-                                <label for="question">Choice 3</label>
+                                <label for="choice3">Choice 3</label>
                                 <input class="form-control" placeholder="Choice 3" name="choice3" type="text" value="" id="choice3">
                                 
-                                <label for="question">Choice 4</label>
+                                <label for="choice4">Choice 4</label>
                                 <input class="form-control" placeholder="Choice 4" name="choice4" type="text" value="" id="choice4">
-                            </form>
+                            </div>
+
+                            <div class="tf box" style="display: none;">
+                                haha
+                            </div>
+
+                            <div class="shan box" style="display: none;">
+                                <label for="short_answer">Answer</label>
+                                <input class="form-control" placeholder="Answer" name="short_answer" type="text" value="" id="short_answer">
+                            </div>
+
+                            <!-- end of hidden select -->
 
                             <div class="form-group">
                                 <label for="points">Points</label>
@@ -90,7 +103,6 @@
     <hr>
 
 
-
     <small>Written on {{$quiz->created_at}} by {{$quiz->user->name}}</small>
     <hr>
 
@@ -105,5 +117,19 @@
                 {!!Form::close()!!}
         @endif
     @endif
-
+<script>
+$(document).ready(function(){
+    $("#question_type").change(function(){
+        $(this).find("option:selected").each(function(){
+            var optionValue = $(this).attr("value");
+            if(optionValue){
+                $(".box").not("." + optionValue).hide();
+                $("." + optionValue).show();
+            } else{
+                $(".box").hide();
+            }
+        });
+    }).change();
+});
+</script>
 @endsection
