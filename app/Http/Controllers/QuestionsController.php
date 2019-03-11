@@ -69,6 +69,8 @@ class QuestionsController extends Controller
         $question ->choice3 = $request -> input('choice3');
         $question ->choice4 = $request -> input('choice4');
 
+        $question ->true_false = $request -> input('true_false');
+
         $question ->short_answer = $request -> input('short_answer');
 
         $question ->user_id = auth()->user()->id;
