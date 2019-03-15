@@ -22,7 +22,7 @@
             ], 
 
 
-            null, ['class'=> 'form-control' ,'placeholder' => ''])}}
+            $quiz->category, ['class'=> 'form-control' ,'placeholder' => ''])}}
         </div>
         <div class="form-group">
             {{Form::file('cover_image')}}

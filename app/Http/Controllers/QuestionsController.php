@@ -115,7 +115,9 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $question = Question::findOrFail($request->question_id);
+        $question->update($request->all());
+        return redirect("/quizzes/{$id}");
     }
 
     /**
@@ -126,6 +128,18 @@ class QuestionsController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $question = Question::find($id);
+        //check for correct user
+
+        $question-> delete();
+        
+        return back()->with('success', 'Post Removed');
+    }
+
+    public function getIdEdit($id)
+    {
+        $question = Question::find($id);
+
+        return view('question.form')->with('questions', $question);
     }
 }
