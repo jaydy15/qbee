@@ -1,9 +1,6 @@
 
 
-    <form action="{{url('')}}/questions/{{$question->id}}/edit" method="post">
-        {{method_field('patch')}}
-        {{csrf_field()}}
-        <input type="hidden" name="question_id" id="question_id" value="">
+    
 
         <!-- Form -->
         <div class="form-group">
@@ -13,17 +10,17 @@
 
         <div class="form-group">
             <label for="question_type2">Question Type</label>
-            <select class="form-control" id="question_type" name="question_type" value="{{$question->question_type}}" onchange="onChange">
+            <select class="form-control" id="type" name="question_type">
                 <option selected="selected" value="" ></option>
-                <option value="mc">Multiple Choice</option>
-                <option value="tf">True or False</option>
-                <option value="shan">Short Answer</option>
+                <option value="a">Multiple Choice</option>
+                <option value="b">True or False</option>
+                <option value="c">Short Answer</option>
             </select>
         </div>
 
         <!-- hidden div for select -->
 
-        <div id="mc" class="choices" style="display: none;">
+        <div id="a" class="choices" style="display: none;">
             <label for="choice1">Choice 1</label>
             <input class="form-control" placeholder="Choice 1" name="choice1" type="text" value="{{$question->choice1}}" id="choice1">
 
@@ -37,13 +34,13 @@
             <input class="form-control" placeholder="Choice 4" name="choice4" type="text" value="{{$question->choice4}}" id="choice4">
         </div>
 
-        <div id="tf" class="choices" style="display: none;">
+        <div id="b" class="choices" style="display: none;">
             {{ Form::label('true_false', 'Answer')}}
             {{ Form::radio('true_false', '1')}} True
             {{ Form::radio('true_false', '0')}} False
         </div>
 
-        <div id="shan" class="choices" style="display: none;">
+        <div id="c" class="choices" style="display: none;">
             <label for="short_answer">Answer</label>
             <input class="form-control" placeholder="Answer" value="{{$question->short_answer}}" name="short_answer" type="text" id="short_answer">
         </div>
@@ -59,5 +56,4 @@
             <label for="time_limit">Time Limit</label>
             <input class="form-control" placeholder="Time Limit" name="time_limit" type="text" value="{{$question->time_limit}}" id="time_limit">
         </div>
-    </form>
 

@@ -19,6 +19,7 @@
     <link rel="stylesheet" href="https://bootswatch.com/4/minty/bootstrap.min.css">
 </head>
 <body>
+
     <div id="app">
         @include('inc.navbar')
         <div class="container">
@@ -27,6 +28,10 @@
         </div>
     </div>
 
-
 </body>
+<script>
+function getQuizID(id) {
+    document.getElementById("try").innerHTML = id;
+}
+</script>
 </html>

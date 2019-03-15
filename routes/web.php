@@ -21,3 +21,7 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('questions/store/{id}', 'QuestionsController@store');
+
+
+Route::get('/homePage', 'homePageController@index')->name('homePage');
+Route::get('/lobby', 'lobbyController@index');

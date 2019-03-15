@@ -14,7 +14,7 @@
                     <div class="col-md-8 col-sm-8">
                         <h3><a>{{$question->question}}</a></h3>
                         <div class="text-right">
-                        <!--<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal" data-id="{{$question->id}}" data-question="{{$question->question}}" data-questype="{{$question->question_type}}" data-points="{{$question->points}}" data-time="{{$question->time_limit}}">Edit</button> -->
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal" data-id="{{$question->id}}" data-question="{{$question->question}}" data-questype="{{$question->question_type}}" data-points="{{$question->points}}" data-time="{{$question->time_limit}}">Edit</button> 
                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deletemodal">Delete</button>
                         </div>
                         <small>Category on {{$question->question_type}}</small>
@@ -46,7 +46,7 @@
 
                             <div class="form-group">
                                 <label for="question_type">Question Type</label>
-                                <select class="form-control" id="question_type" name="question_type" onchange="onChange">
+                                <select class="form-control" id="question_type" name="question_type" >
                                     <option selected="selected" value=""></option>
                                     <option value="mc">Multiple Choice</option>
                                     <option value="tf">True or False</option>
@@ -163,6 +163,8 @@
             <!-- end of modal delete -->
 
     </div>
+
+    <a href="/lobby" onclick="getQuizID({{$quiz->id}});" class="btn btn-warning">Generate Lobby</a>
     <hr>
 
 
@@ -177,6 +179,18 @@
 $(function() {
 
 $('#question_type').change(function(){
+$('.choices').hide();
+$('#' + $(this).val()).show();
+});
+
+});
+
+</script>
+<script>
+
+$(function() {
+
+$('#type').change(function(){
 $('.choices').hide();
 $('#' + $(this).val()).show();
 });
@@ -202,9 +216,11 @@ $('#' + $(this).val()).show();
 </script>
 
 <script>
+/*
 function getId(id) {
     $('#editmodal').modal('show'); 
     document.getElementById("question_id").innerHTML = id;
-}
+}*/
 </script>
+
 @endsection
