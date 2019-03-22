@@ -38,6 +38,7 @@
                                 </tr>
                             @endforeach
                         </table>
+                        <example-component></example-component>
                     @else
                         <p>You have no posts</p>
                     @endif
@@ -46,4 +47,6 @@
         </div>
     </div>
 </div>
+
+
 @endsection
