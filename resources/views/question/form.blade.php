@@ -21,23 +21,25 @@
         <!-- hidden div for select -->
 
         <div id="a" class="choices" style="display: none;">
-            <label for="choice1">Choice 1</label>
-            <input class="form-control" placeholder="Choice 1" name="choice1" type="text" value="{{$question->choice1}}" id="choice1">
+            <label for="choice1">Choice 1 &nbsp;&nbsp;</label> Corrret Answer {{ Form::radio('right_answer', '1')}}
+            <input class="form-control" placeholder="Choice 1" value="{{$question->choice1}}" name="choice1" type="text" value="{{$question->choice1}}" id="choice1">
 
-            <label for="choice2">Choice 2</label>
-            <input class="form-control" placeholder="Choice 2" name="choice2" type="text" value="{{$question->choice2}}" id="choice2">
+            <label for="choice2">Choice 2 &nbsp;&nbsp;</label> Corrret Answer {{ Form::radio('right_answer', '2')}}
+            <input class="form-control" placeholder="Choice 2" value="{{$question->choice2}}" name="choice2" type="text" value="{{$question->choice2}}" id="choice2">
 
-            <label for="choice3">Choice 3</label>
-            <input class="form-control" placeholder="Choice 3" name="choice3" type="text" value="{{$question->choice3}}" id="choice3">
+            <label for="choice3">Choice 3 &nbsp;&nbsp;</label> Corrret Answer {{ Form::radio('right_answer', '3')}}
+            <input class="form-control" placeholder="Choice 3" value="{{$question->choice3}}" name="choice3" type="text" value="{{$question->choice3}}" id="choice3">
             
-            <label for="choice4">Choice 4</label>
-            <input class="form-control" placeholder="Choice 4" name="choice4" type="text" value="{{$question->choice4}}" id="choice4">
+            <label for="choice4">Choice 4 &nbsp;&nbsp;</label> Corrret Answer {{ Form::radio('right_answer', '4')}}
+            <input class="form-control" placeholder="Choice 4" value="{{$question->choice4}}" name="choice4" type="text" value="{{$question->choice4}}" id="choice4">
         </div>
 
         <div id="b" class="choices" style="display: none;">
-            {{ Form::label('true_false', 'Answer')}}
-            {{ Form::radio('true_false', '1')}} True
-            {{ Form::radio('true_false', '0')}} False
+
+            <label for="true_false">Answer</label>
+            <input name="true_false" id="true_false" type="radio" value="1" {{ ($question->true_false=="1")? "checked" : "" }}> True
+            <input name="true_false" id="true_false" type="radio" value="0" {{ ($question->true_false=="0")? "checked" : "" }}> False
+            
         </div>
 
         <div id="c" class="choices" style="display: none;">

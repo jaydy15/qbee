@@ -115,8 +115,37 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question = Question::findOrFail($request->question_id);
-        $question->update($request->all());
+        $this-> validate($request, [
+            'question'=>'required',
+            'question_type'=> 'required',
+            'points' => 'required',
+            'time_limit' => 'required',
+        ]);
+
+        //create question
+        $question = new Question;
+        $question ->question = $request -> get('question');
+        $question ->question_type = $request -> get('question_type');
+        $question ->points = $request -> get('points');
+        $question ->time_limit = $request -> get('time_limit');
+
+        $question ->choice1 = $request -> get('choice1');
+        $question ->choice2 = $request -> get('choice2');
+        $question ->choice3 = $request -> get('choice3');
+        $question ->choice4 = $request -> get('choice4');
+
+        $question ->true_false = $request -> get('true_false');
+
+        $question ->short_answer = $request -> get('short_answer');
+
+        $question ->user_id = auth()->user()->id;
+
+        $quiz = Quiz::find($id);
+        $question ->quiz_id = $quiz ->id;
+        //$question->quiz_id = $id;
+
+        $question ->save();
+
         return redirect("/quizzes/{$id}");
     }
 
