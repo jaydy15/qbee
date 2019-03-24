@@ -14,7 +14,7 @@
                     <div class="col-md-8 col-sm-8">
                         <h3><a>{{$question->question}}</a></h3>
                         <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal" data-id="{{$question->id}}" data-question="{{$question->question}}" data-questype="{{$question->question_type}}" data-trufal="{{$question->true_false}}" data-points="{{$question->points}}" data-time="{{$question->time_limit}}">Edit</button> 
+                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal" data-id="{{$question->id}}" data-question="{{$question->question}}" data-questype="{{$question->question_type}}" data-trufal="{{$question->true_false}}" data-rightanswer="{{$question->right_answer}}" data-points="{{$question->points}}" data-time="{{$question->time_limit}}">Edit</button>
                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deletemodal">Delete</button>
                         </div>
                         <small>Category on {{$question->question_type}}</small>
@@ -22,7 +22,7 @@
                 </div>
             </div>
         @endforeach
-
+        {{ $qpage->links() }}
 
         <!-- Modal create -->
             <div class="modal fade" id="createmodal" tabindex="-1" role="dialog">
@@ -65,7 +65,7 @@
 
                                 <label for="choice3">Choice 3 &nbsp;&nbsp;</label> Corrret Answer {{ Form::radio('right_answer', '3')}}
                                 <input class="form-control" placeholder="Choice 3" name="choice3" type="text" value="" id="choice3">
-                                
+
                                 <label for="choice4">Choice 4 &nbsp;&nbsp;</label> Corrret Answer {{ Form::radio('right_answer', '4')}}
                                <input class="form-control" placeholder="Choice 4" name="choice4" type="text" value="" id="choice4">
                             </div>
@@ -118,18 +118,16 @@
                             </button>
                         </div>
                         <div class="modal-body">
-                        <form action="{{url('')}}/questions/{{$question->id}}" method="post">
-                        {{method_field('patch')}}
+                        {!!Form::open(['action' => ['QuestionsController@update', $question->id], 'method' => 'POST', 'enctype' => 'multipart/form-data'])!!}
                         {{csrf_field()}}
-                        <input type="hidden" name="question_id" id="question_id" value="">
                         @include('question.form')
-                        </form>
                         </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save</button>
+                                {{Form::hidden('_method','PUT')}}
+                                {{Form::submit('Save', ['class'=>'btn btn-primary'])}}
                             </div>
-                           
+                            {{!! Form::close() !!}}
                         </div>
                     </div>
                </div>
@@ -147,7 +145,7 @@
                                 <span aria-hidden="true">&times;</span>
                             </button>
                         </div>
-                       
+
                         <div class="modal-body">
                             <p>Are you sure you want to delete it?</p>
                         </div>
@@ -158,7 +156,7 @@
                                 {{Form::submit('Yes', ['class' => 'btn btn-danger'])}}
                                 {!!Form::close()!!}
                             </div>
-                           
+
                         </div>
                     </div>
                </div>
@@ -204,28 +202,30 @@ $('#' + $(this).val()).show();
 
 </script>
 <script>
-  
+
   $('#editmodal').on('show.bs.modal', function (event) {
-      var button = $(event.relatedTarget) 
+      var button = $(event.relatedTarget)
       var question = button.data('question')
       var questype = button.data('question_type')
       var trufal = button.data('true_false')
+      var rightanswer = button.data('right_answer')
       var points = button.data('points')
-      var time = button.data('time') 
+      var time = button.data('time')
       var modal = $(this)
       modal.find('.modal-body #question').val(question);
       modal.find('.modal-body #type').val(questype);
       modal.find('.modal-body #true_false').val(trufal);
+      modal.find('.modal-body #right_answer').val(rightanswer);
       modal.find('.modal-body #points').val(points);
       modal.find('.modal-body #time').val(time);
-    
+
 })
 </script>
 
 <script>
 /*
 function getId(id) {
-    $('#editmodal').modal('show'); 
+    $('#editmodal').modal('show');
     document.getElementById("question_id").innerHTML = id;
 }*/
 </script>
