@@ -24,9 +24,9 @@ class QuestionsController extends Controller
         $user = User::find($user_id);
 
 
-        $quiz = Quiz::find($quiz_id);
+        $question = Question::all();
 
-        return view('question.index')->with('questions', $user->questions);
+        return view('question.index')->with('questions', $question);
     }
 
     /**
