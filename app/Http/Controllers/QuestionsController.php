@@ -69,6 +69,8 @@ class QuestionsController extends Controller
         $question ->choice3 = $request -> input('choice3');
         $question ->choice4 = $request -> input('choice4');
 
+        $question ->right_answer = $request -> input('right_answer');
+
         $question ->true_false = $request -> input('true_false');
 
         $question ->short_answer = $request -> input('short_answer');
@@ -122,31 +124,29 @@ class QuestionsController extends Controller
             'time_limit' => 'required',
         ]);
 
-        //create question
-        $question = new Question;
-        $question ->question = $request -> get('question');
-        $question ->question_type = $request -> get('question_type');
-        $question ->points = $request -> get('points');
-        $question ->time_limit = $request -> get('time_limit');
+        $question = Question::find($id);
+        $question ->question = $request -> input('question');
+        $question ->question_type = $request -> input('question_type');
+        $question ->points = $request -> input('points');
+        $question ->time_limit = $request -> input('time_limit');
 
-        $question ->choice1 = $request -> get('choice1');
-        $question ->choice2 = $request -> get('choice2');
-        $question ->choice3 = $request -> get('choice3');
-        $question ->choice4 = $request -> get('choice4');
+        $question ->choice1 = $request -> input('choice1');
+        $question ->choice2 = $request -> input('choice2');
+        $question ->choice3 = $request -> input('choice3');
+        $question ->choice4 = $request -> input('choice4');
 
-        $question ->true_false = $request -> get('true_false');
+        $question ->right_answer = $request -> input('right_answer');
 
-        $question ->short_answer = $request -> get('short_answer');
+        $question ->true_false = $request -> input('true_false');
+
+        $question ->short_answer = $request -> input('short_answer');
 
         $question ->user_id = auth()->user()->id;
 
-        $quiz = Quiz::find($id);
-        $question ->quiz_id = $quiz ->id;
-        //$question->quiz_id = $id;
 
         $question ->save();
 
-        return redirect("/quizzes/{$id}");
+        return back()->with('success', 'Question successfully edited');
     }
 
     /**
@@ -161,7 +161,7 @@ class QuestionsController extends Controller
         //check for correct user
 
         $question-> delete();
-        
+
         return back()->with('success', 'Post Removed');
     }
 
