@@ -2,7 +2,10 @@
 
 @section('content')
 <div class="container">
-    eto ang lobby with <p>{{$random}}</p>
-    <div id="try"></div>
+    eto ang lobby with
+
+    {{$quiz->game_pin}}
+
+    
 </div>
 @endsection

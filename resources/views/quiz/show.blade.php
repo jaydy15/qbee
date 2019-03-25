@@ -7,7 +7,9 @@
 
         <p>{{$quiz->category}}</p>
         <a href="" class="btn btn-info" data-toggle="modal" data-target="#createmodal">Add Question</a>
-
+    
+    <div class="container">
+      <table class="table table-striped">
         @foreach($questions as $question)
             <div class="card border-info mb-3 mt-3">
                 <div class="row">
@@ -22,15 +24,9 @@
                 </div>
             </div>
         @endforeach
-
-
-
-
-    
-       
-
-
-        <!-- {{ $qpage->links() }} -->
+        </table>
+        {{ $questions -> links() }}
+    </div>
 
         <!-- Modal create -->
             <div class="modal fade" id="createmodal" tabindex="-1" role="dialog">
@@ -175,7 +171,7 @@
 
     </div>
 
-    <a href="/lobby" onclick="getQuizID({{$quiz->id}});" class="btn btn-warning">Generate Lobby</a>
+    <a href="/lobby/index/{{$quiz->id}}" class="btn btn-warning">Generate Lobby</a>
     <hr>
 
 
@@ -231,11 +227,7 @@ $('#' + $(this).val()).show();
 </script>
 
 <script>
-/*
-function getId(id) {
-    $('#editmodal').modal('show');
-    document.getElementById("question_id").innerHTML = id;
-}*/
+
 </script>
 
 @endsection

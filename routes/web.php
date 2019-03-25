@@ -24,4 +24,4 @@ Route::post('questions/store/{id}', 'QuestionsController@store');
 
 
 Route::get('/homePage', 'homePageController@index')->name('homePage');
-Route::get('/lobby', 'lobbyController@index');
+Route::get('/lobby/index/{id}', 'lobbyController@index');

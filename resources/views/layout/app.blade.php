@@ -28,9 +28,5 @@
     </div>
 
 </body>
-<script>
-function getQuizID(id) {
-    document.getElementById("try").innerHTML = id;
-}
-</script>
+
 </html>

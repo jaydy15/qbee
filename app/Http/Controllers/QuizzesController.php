@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\DB;
 use App\Quiz;
 use App\User;
 use App\Question;
+use Keygen;
 
 class QuizzesController extends Controller
 {
@@ -63,6 +64,7 @@ class QuizzesController extends Controller
         $quiz ->title = $request -> input('title');
         $quiz ->category = $request -> input('category');
         $quiz ->description = $request -> input('description');
+        $quiz ->game_pin = $random = Keygen::numeric(8)->prefix(mt_rand(1,9))->generate(true);
         $quiz->user_id = auth()->user()->id;
         $quiz ->save();
 
@@ -78,9 +80,8 @@ class QuizzesController extends Controller
     public function show($id)
     {
         $quiz = Quiz::find($id);
-        $questions = DB::table('questions')->where('quiz_id', '=', $id)->get();
-        $qpage = Question::paginate(3);
-        return view('quiz.show')->with('quiz', $quiz)->with('questions',$questions)->with('qpage',$qpage);
+        $questions = DB::table('questions')->where('quiz_id', '=', $id)->Paginate(2);
+        return view('quiz.show')->with('quiz', $quiz)->with('questions',$questions);
     }
 
     /**
