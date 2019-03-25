@@ -9,7 +9,7 @@
         <a href="" class="btn btn-info" data-toggle="modal" data-target="#createmodal">Add Question</a>
 
         @foreach($questions as $question)
-            <div class="card">
+            <div class="card border-info mb-3 mt-3">
                 <div class="row">
                     <div class="col-md-8 col-sm-8">
                         <h3><a>{{$question->question}}</a></h3>
@@ -22,7 +22,15 @@
                 </div>
             </div>
         @endforeach
-        {{ $qpage->links() }}
+
+
+
+
+    
+       
+
+
+        <!-- {{ $qpage->links() }} -->
 
         <!-- Modal create -->
             <div class="modal fade" id="createmodal" tabindex="-1" role="dialog">
