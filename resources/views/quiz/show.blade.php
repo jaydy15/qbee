@@ -24,9 +24,9 @@
                 </div>
             </div>
         @endforeach
-        </table>
-        {{ $questions -> links() }}
-    </div>
+
+
+        {{ $questions->links() }}
 
         <!-- Modal create -->
             <div class="modal fade" id="createmodal" tabindex="-1" role="dialog">
