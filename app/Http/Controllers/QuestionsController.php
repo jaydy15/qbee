@@ -24,9 +24,9 @@ class QuestionsController extends Controller
         $user = User::find($user_id);
 
 
-        $quiz = Quiz::find($quiz_id);
+        $question = Question::all();
 
-        return view('question.index')->with('questions', $user->questions);
+        return view('question.index')->with('questions', $question);
     }
 
     /**
@@ -68,6 +68,8 @@ class QuestionsController extends Controller
         $question ->choice2 = $request -> input('choice2');
         $question ->choice3 = $request -> input('choice3');
         $question ->choice4 = $request -> input('choice4');
+
+        $question ->right_answer = $request -> input('right_answer');
 
         $question ->true_false = $request -> input('true_false');
 
@@ -115,9 +117,36 @@ class QuestionsController extends Controller
      */
     public function update(Request $request, $id)
     {
-        $question = Question::findOrFail($request->question_id);
-        $question->update($request->all());
-        return redirect("/quizzes/{$id}");
+        $this-> validate($request, [
+            'question'=>'required',
+            'question_type'=> 'required',
+            'points' => 'required',
+            'time_limit' => 'required',
+        ]);
+
+        $question = Question::find($id);
+        $question ->question = $request -> input('question');
+        $question ->question_type = $request -> input('question_type');
+        $question ->points = $request -> input('points');
+        $question ->time_limit = $request -> input('time_limit');
+
+        $question ->choice1 = $request -> input('choice1');
+        $question ->choice2 = $request -> input('choice2');
+        $question ->choice3 = $request -> input('choice3');
+        $question ->choice4 = $request -> input('choice4');
+
+        $question ->right_answer = $request -> input('right_answer');
+
+        $question ->true_false = $request -> input('true_false');
+
+        $question ->short_answer = $request -> input('short_answer');
+
+        $question ->user_id = auth()->user()->id;
+
+
+        $question ->save();
+
+        return back()->with('success', 'Question successfully edited');
     }
 
     /**
@@ -132,7 +161,7 @@ class QuestionsController extends Controller
         //check for correct user
 
         $question-> delete();
-        
+
         return back()->with('success', 'Post Removed');
     }
 

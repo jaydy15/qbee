@@ -30,7 +30,7 @@ class QuizzesController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-     
+
         return view('quiz.index')->with('quizzes', $user->posts);
     }
 
@@ -79,7 +79,8 @@ class QuizzesController extends Controller
     {
         $quiz = Quiz::find($id);
         $questions = DB::table('questions')->where('quiz_id', '=', $id)->get();
-        return view('quiz.show')->with('quiz', $quiz)->with('questions',$questions);
+        $qpage = Question::paginate(3);
+        return view('quiz.show')->with('quiz', $quiz)->with('questions',$questions)->with('qpage',$qpage);
     }
 
     /**
@@ -156,7 +157,7 @@ class QuizzesController extends Controller
             return redirect('/quizzes')->with('error', 'Unauthorized Page');
         }
         $quiz-> delete();
-        
+
         return redirect('/quizzes')->with('success', 'Post Removed');
     }
 }
