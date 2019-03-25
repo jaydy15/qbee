@@ -23,14 +23,7 @@
             </div>
         @endforeach
 
-
-
-
-    
-       
-
-
-        <!-- {{ $qpage->links() }} -->
+        {{ $questions->links() }}
 
         <!-- Modal create -->
             <div class="modal fade" id="createmodal" tabindex="-1" role="dialog">
