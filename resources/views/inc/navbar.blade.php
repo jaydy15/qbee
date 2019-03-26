@@ -23,7 +23,7 @@
               <li class="nav-item"><a class="nav-link" href="{{ route('register') }}"><span style="color:red">R</span>egister</a></li>
           @else
             <ul class="nav navbar-nav nav-right">
-                    <li class="nav-item"><a class="nav-link" href="{{ route('home') }}"><span style="color:red">J</span>oin <span style="color:red">Q</span>uiz</a></li>
+                    <li class="nav-item"><a class="nav-link" href="{{ route('wait') }}"><span style="color:red">J</span>oin <span style="color:red">Q</span>uiz</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('home') }}"><span style="color:red">D</span>ashboard</a></li>
                     <li class="nav-item"><a class="nav-link" href="{{ route('logout') }}"
                         onclick="event.preventDefault();

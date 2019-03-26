@@ -22,8 +22,9 @@ class lobbyController extends Controller
 
     public function joinquiz(Request $request)
     {
-        $quizzes ->game_pin = $request -> input('game_pin');
-        $game_pin = DB::table('quizzes')->where('game_pin', '=', $quizzes)->get();
-        return view('lobby.question')->with('game_pin',$game_pin);
+        
+        $gamepin = Input::get('game_pin');
+        // $game_pin = DB::table('quizzes')->where('game_pin', '=', $gamepin)->get();
+        return view('lobby.question')->with('game_pin', $gamepin);
     }
 }
