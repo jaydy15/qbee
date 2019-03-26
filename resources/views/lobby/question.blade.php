@@ -1,8 +1,6 @@
-<!-- @extends('layout.app')
+   @extends('layout.app')
 
-@section('content')
-    <h1>Questions</h1>
-    <a href="/questions/create" class="btn btn-default">Add Question</a>
+   @section('content')
     @if(count($questions) > 0)
 
         @foreach($questions as $question)
@@ -47,8 +45,5 @@
     @else
         <p>No posts found</p>
     @endif
-@endsection -->
 
-
-
-{{$game_pin}}
+@endsection

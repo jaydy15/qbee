@@ -2,12 +2,11 @@
 
 @section('content')
 <h1>Join Quiz</h1>
-    {!! Form::open(['action' => 'lobbyController@joinquiz', 'method'=>'POST', 'enctype'=>'multipart/data']) !!}
+    {!! Form::open(['action' => 'lobbyController@joinquiz', 'method'=>'PUT', 'enctype'=>'multipart/data']) !!}
         <div class="form-group">
             {{Form::label('game_pin','Game Pin')}}
             {{Form::text('game_pin','',['class'=> 'form-control', 'placeholder' => ''])}}
         </div>
-
         {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
         <!-- <button type="button" onclick="getPin()">Enter</button> -->
     {!! Form::close() !!}
