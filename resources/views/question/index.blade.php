@@ -6,7 +6,7 @@
     @if(count($questions) > 0)
 
         @foreach($questions as $question)
-            <div class="card border-info mb-3 mt-3">
+            <div class="card border-info mb-3 mt-3" style="border-color:red !important">
                 <div class="row p-3">
                     <div class="col-md-8 col-sm-8 ">
                         <h3>{{$question->question}}</h3>

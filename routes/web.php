@@ -25,3 +25,5 @@ Route::post('questions/store/{id}', 'QuestionsController@store');
 
 Route::get('/homePage', 'homePageController@index')->name('homePage');
 Route::get('/lobby/index/{id}', 'lobbyController@index');
+Route::get('/lobby/{id}/joinquiz', 'lobbyController@joinquiz');
+Route::get('/lobby/join', 'lobbyController@lobby');
