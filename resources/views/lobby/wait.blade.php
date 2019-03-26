@@ -2,13 +2,36 @@
 
 @section('content')
 <h1>Join Quiz</h1>
-    {!! Form::open(['action' => 'lobbyController@lobby', 'method'=>'POST', 'enctype'=>'multipart/data']) !!}
+    {!! Form::open(['action' => 'lobbyController@joinquiz', 'method'=>'POST', 'enctype'=>'multipart/data']) !!}
         <div class="form-group">
             {{Form::label('game_pin','Game Pin')}}
             {{Form::text('game_pin','',['class'=> 'form-control', 'placeholder' => ''])}}
         </div>
 
-    
         {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
+        <!-- <button type="button" onclick="getPin()">Enter</button> -->
     {!! Form::close() !!}
-    @endsection
+
+
+<!-- <script>
+function getPin() {
+    var enteredPin = document.getElementById("game_pin").value;
+    
+    jQuery.ajax({
+        url: "{{ url('/lobby/joinquiz/enteredPin') }}",
+        method: 'post',
+        data: {
+            game_pin: jQuery('#game_pin').val(),
+        },
+        success: function(result){
+            console.log(result);
+            
+            if (enteredPin==result) {
+                location.replace("/lobby/question");
+            }
+        }
+    });
+    
+}
+</script> -->
+@endsection

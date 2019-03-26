@@ -1,31 +1,54 @@
-@extends('layout.app')
+<!-- @extends('layout.app')
 
 @section('content')
+    <h1>Questions</h1>
+    <a href="/questions/create" class="btn btn-default">Add Question</a>
+    @if(count($questions) > 0)
 
-    <h1>{{$quiz->title}}</h1>
-    <div>
-
-        <p>{{$quiz->category}}</p>
-        <a href="" class="btn btn-info" data-toggle="modal" data-target="#createmodal">Add Question</a>
-    
-    <div class="container">
-      <table class="table table-striped">
         @foreach($questions as $question)
-            <div class="card border-info mb-3 mt-3">
-                <div class="row">
-                    <div class="col-md-8 col-sm-8">
-                        <h3><a>{{$question->question}}</a></h3>
-                        <div class="text-right">
-                        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal" data-id="{{$question->id}}" data-question="{{$question->question}}" data-questype="{{$question->question_type}}" data-trufal="{{$question->true_false}}" data-rightanswer="{{$question->right_answer}}" data-points="{{$question->points}}" data-time="{{$question->time_limit}}">Edit</button>
-                        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deletemodal">Delete</button>
-                        </div>
-                        <small>Category on {{$question->question_type}}</small>
+            <div class="card border-info mb-3 mt-3" style="border-color:red !important">
+                <div class="row p-3">
+                    <div class="col-md-8 col-sm-8 ">
+                        <h3>{{$question->question}}</h3>
+                       @if (($question->question_type) == 'mc' || ($question->question_type) == 'a')
+
+
+                       <table class="table">
+                        <tbody>
+                            <tr>
+                            <td><input type="button" value="{{$question->choice1}}" id="choice1" class="btn btn-lg btn-block" style="background-color:#779ecb"></td>
+                            <td><input type="button" value="{{$question->choice2}}" id="choice2" class="btn btn-lg btn-block" style="background-color:#ff6961"></td>
+                            </tr>
+
+                            <tr>
+                            <td><input type="button" value="{{$question->choice3}}" id="choice3" class="btn btn-lg btn-block" style="background-color:#cb99c9"></td>
+                            <td><input type="button" value="{{$question->choice4}}" id="choice4" class="btn btn-lg btn-block" style="background-color:#77dd77"></td>
+                            </tr>
+                        </tbody>
+                        </table>
+
+                        @elseif (($question->question_type) == 'tf' || ($question->question_type) == 'b')
+                        <input type="button" value="TRUE" {{($question->true_false== '1')}}  class="btn btn-lg btn-block" style="background-color:#A0BABD">
+                        <br>
+                        <input type="button" value="FALSE" {{($question->true_false=='0')}}  class="btn btn-lg btn-block" style="background-color:#904B4E">
+                        <br>
+                        @elseif (($question->question_type) == 'shan' || ($question->question_type) == 'c')
+                        <label for="answer" class="font-weight-bold">Your Answer</label>
+                        <input type="text" name="" id="answer" class="form-control"> 
+                        
+                        <input type="submit" value="submit" class="btn btn-success mt-3 ">
+                       @endif
+
                     </div>
                 </div>
             </div>
         @endforeach
+   
+    @else
+        <p>No posts found</p>
+    @endif
+@endsection -->
 
 
-        {{ $questions->links() }}
-        
-@endsection
+
+{{$game_pin}}
