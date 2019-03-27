@@ -105,7 +105,8 @@ class QuestionsController extends Controller
      */
     public function edit($id)
     {
-        //
+        $questions = Question::find($id);
+        return view('question.edit')->with('question', $questions);
     }
 
     /**
@@ -143,10 +144,10 @@ class QuestionsController extends Controller
 
         $question ->user_id = auth()->user()->id;
 
-
+        $user_id =  auth()->user()->id;
         $question ->save();
 
-        return back()->with('success', 'Question successfully edited');
+        return redirect()->back()->with('success', 'Question successfully edited');
     }
 
     /**
