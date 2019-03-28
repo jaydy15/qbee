@@ -16,6 +16,7 @@
                     <div class="col-md-8 col-sm-8">
                         <h3><a>{{$question->question}}</a></h3>
                         <div class="text-right">
+                        <a href="/questions/{{$question->id}}/edit" class="btn btn-primary">Edit</a>
                         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#editmodal" data-id="{{$question->id}}" data-question="{{$question->question}}" data-questype="{{$question->question_type}}" data-trufal="{{$question->true_false}}" data-rightanswer="{{$question->right_answer}}" data-points="{{$question->points}}" data-time="{{$question->time_limit}}">Edit</button>
                         <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#deletemodal">Delete</button>
                         </div>
