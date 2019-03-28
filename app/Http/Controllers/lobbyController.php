@@ -23,13 +23,22 @@ class lobbyController extends Controller
     public function joinquiz(Request $request)
     {
         try{
+            session_start();
+   
+            if( isset( $_SESSION['counter'] ) ) {
+               $_SESSION['counter'] += 1;
+            }else {
+               $_SESSION['counter'] = 1;
+            }
+
             $gamepin = $request->input('game_pin');
+            
             $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
             if($gamepin == '' ){
                 return view('lobby.wait');
             }
             $quiz_id = json_decode(json_encode($game_pin), true);
-            $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->paginate(10);
+            $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->where('status', '=', '1')->get();
             return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions);
         }
         catch(\Exception $e){

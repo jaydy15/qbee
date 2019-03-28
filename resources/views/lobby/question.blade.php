@@ -37,40 +37,47 @@
     <h1>Countdown Timer</h1>
         <div id="clockdiv">
             <div>
-                <span class="seconds"></span>
+                <span id="seconds"></span>
                 <div class="smalltext">Seconds</div>
             </div>
         </div>
 </div>
+
+<div id="box">
+        @php $index = 0; $hideClass = ""; @endphp
         @foreach($questions as $question)
-            <div class="card border-info mb-3 mt-3" style="border-color:red !important">
+        @php if($index > 0){
+            $hideClass = "d-none";
+        }
+        @endphp
+            <div class="question card border-info mb-3 mt-3 {{$hideClass}}" id="q{{$index}}" style="border-color:red !important;">
                 <div class="row p-3">
                     <div class="col-md-8 col-sm-8 ">
-                        <h3>{{$question->question}}</h3>
-                        <input type="hidden" id="value" value="{{$question->time_limit}}">
-                       @if (($question->question_type) == 'mc' || ($question->question_type) == 'a')
+                        <h3>{{$questions[$index]->question}}</h3>
+                        <input type="hidden" id="value{{$index}}" value="{{$questions[$index]->time_limit}}">
+                       @if (($questions[$index]->question_type) == 'mc' || ($questions[$index]->question_type) == 'a')
 
 
                        <table class="table">
                         <tbody>
                             <tr>
-                            <td><input type="button" value="{{$question->choice1}}" id="choice1" class="btn btn-lg btn-block" style="background-color:#779ecb"></td>
-                            <td><input type="button" value="{{$question->choice2}}" id="choice2" class="btn btn-lg btn-block" style="background-color:#ff6961"></td>
+                            <td><input type="button" value="{{$questions[$index]->choice1}}" id="choice1" class="btn btn-lg btn-block" style="background-color:#779ecb"></td>
+                            <td><input type="button" value="{{$questions[$index]->choice2}}" id="choice2" class="btn btn-lg btn-block" style="background-color:#ff6961"></td>
                             </tr>
 
                             <tr>
-                            <td><input type="button" value="{{$question->choice3}}" id="choice3" class="btn btn-lg btn-block" style="background-color:#cb99c9"></td>
-                            <td><input type="button" value="{{$question->choice4}}" id="choice4" class="btn btn-lg btn-block" style="background-color:#77dd77"></td>
+                            <td><input type="button" value="{{$questions[$index]->choice3}}" id="choice3" class="btn btn-lg btn-block" style="background-color:#cb99c9"></td>
+                            <td><input type="button" value="{{$questions[$index]->choice4}}" id="choice4" class="btn btn-lg btn-block" style="background-color:#77dd77"></td>
                             </tr>
                         </tbody>
                         </table>
 
-                        @elseif (($question->question_type) == 'tf' || ($question->question_type) == 'b')
-                        <input type="button" value="TRUE" {{($question->true_false== '1')}}  class="btn btn-lg btn-block" style="background-color:#A0BABD">
+                        @elseif (($questions[$index]->question_type) == 'tf' || ($questions[$index]->question_type) == 'b')
+                        <input type="button" value="TRUE" {{($questions[$index]->true_false== '1')}}  class="btn btn-lg btn-block" style="background-color:#A0BABD">
                         <br>
-                        <input type="button" value="FALSE" {{($question->true_false=='0')}}  class="btn btn-lg btn-block" style="background-color:#904B4E">
+                        <input type="button" value="FALSE" {{($questions[$index]->true_false=='0')}}  class="btn btn-lg btn-block" style="background-color:#904B4E">
                         <br>
-                        @elseif (($question->question_type) == 'shan' || ($question->question_type) == 'c')
+                        @elseif (($questions[$index]->question_type) == 'shan' || ($questions[$index]->question_type) == 'c')
                         <label for="answer" class="font-weight-bold">Your Answer</label>
                         <input type="text" name="" id="answer" class="form-control"> 
                         
@@ -80,43 +87,56 @@
                     </div>
                 </div>
             </div>
+            @php $index++; @endphp
         @endforeach
-   
     @else
         <p>No posts found</p>
     @endif
-
-
+</div>
+    
 <script>
-function getTimeRemaining(endtime) {
-  var t = Date.parse(endtime) - Date.parse(new Date());
-  var timeGet = document.getElementById("value").value;
-  var seconds = Math.floor((t / 1000) % timeGet);
-  return {
-    'total': t,
-    'seconds': seconds
-  };
+var timeleft = document.getElementById("value0").value;
+timerCount();
+function timerCount(){
+    var downloadTimer = setInterval(function(){
+        document.getElementById("seconds").innerHTML = timeleft;
+        timeleft -= 1;
+        if(timeleft <= 0){
+            loopBox();
+        clearInterval(downloadTimer);
+        document.getElementById("seconds").innerHTML = ""
+        }
+    }, 1000);
 }
+</script>
+            
+<script>
 
-function initializeClock(id, endtime) {
-  var clock = document.getElementById(id);
-  var secondsSpan = clock.querySelector('.seconds');
-
-  function updateClock() {
-    var t = getTimeRemaining(endtime);
-
-    secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
-
-    if (t.total <= 0) {
-      clearInterval(timeinterval);
-    }
-  }
-
-  updateClock();
-  var timeinterval = setInterval(updateClock, 1000);
+function loopBox() {
+    var currentQ;
+    var qS = $("#box").children(".question");
+    console.log("qS: " + qS);
+    console.log("qSsize: " + qS.length);
+    qS.each(function(index){
+        var q = $(this);
+        console.log("q: " + q);
+        console.log("qid: " + q.attr('id'));
+            if(!$(this).hasClass("d-none")) {
+                console.log("no hidden");
+                currentQ =  $(this).attr("id");
+              }
+              var a = $(this).addClass("d-none");
+               
+    });
+    console.log("currentQ: " + currentQ);
+                  currentQ = currentQ.replace('q', '');
+                  var nextQ = parseInt(currentQ) + 1;
+                  console.log("nextQ: " + nextQ);
+                  var c = "q" + nextQ;
+                  console.log("c: " + c);
+                  $("#q" + nextQ).removeClass("d-none");
+                  timeleft = $('#value' + nextQ).val();
+                  timerCount();                      
 }
-
-var deadline = new Date(Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000);
-initializeClock('clockdiv', deadline);
 </script>
 @endsection
