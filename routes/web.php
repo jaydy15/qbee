@@ -18,7 +18,7 @@ Route::view('/quizzes/{{$quiz->id}}/show', 'show');
 Route::resource('questions', 'QuestionsController');
 
 Auth::routes();
-
+Route::post('/lobby/check', 'lobbyController@check');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('questions/store/{id}', 'QuestionsController@store');
 Route::get('/wait', 'lobbyController@lobby')->name('wait');

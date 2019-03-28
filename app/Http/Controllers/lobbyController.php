@@ -45,4 +45,10 @@ class lobbyController extends Controller
             return redirect('/wait')->with('success', 'Lobby not found');
         }
     }
+    public function check()
+    {
+        $check = getMultiple;
+
+        return view('lobby.question')->with('result', $check);
+    }
 }

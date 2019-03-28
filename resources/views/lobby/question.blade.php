@@ -61,21 +61,22 @@
                        <table class="table">
                         <tbody>
                             <tr>
-                            <td><input type="button" value="{{$questions[$index]->choice1}}" id="choice1" class="btn btn-lg btn-block" style="background-color:#779ecb"></td>
-                            <td><input type="button" value="{{$questions[$index]->choice2}}" id="choice2" class="btn btn-lg btn-block" style="background-color:#ff6961"></td>
+                            <td><button value="1" id="choice1" onclick="getMulti()" class="btn btn-lg btn-block" style="background-color:#779ecb">{{$questions[$index]->choice1}}</button></td>
+                            <td><button value="2" id="choice2" class="btn btn-lg btn-block" style="background-color:#ff6961">{{$questions[$index]->choice2}}</button></td>
                             </tr>
 
                             <tr>
-                            <td><input type="button" value="{{$questions[$index]->choice3}}" id="choice3" class="btn btn-lg btn-block" style="background-color:#cb99c9"></td>
-                            <td><input type="button" value="{{$questions[$index]->choice4}}" id="choice4" class="btn btn-lg btn-block" style="background-color:#77dd77"></td>
+                            <td><button value="3" id="choice3" class="btn btn-lg btn-block" style="background-color:#cb99c9">{{$questions[$index]->choice3}}</button></td>
+                            <td><button value="4" id="choice4" class="btn btn-lg btn-block" style="background-color:#77dd77">{{$questions[$index]->choice4}}</button></td>
                             </tr>
                         </tbody>
                         </table>
 
                         @elseif (($questions[$index]->question_type) == 'tf' || ($questions[$index]->question_type) == 'b')
-                        <input type="button" value="TRUE" {{($questions[$index]->true_false== '1')}}  class="btn btn-lg btn-block" style="background-color:#A0BABD">
+                        
+                        <button value="1" class="btn btn-lg btn-block" style="background-color:#A0BABD">TRUE</button>
                         <br>
-                        <input type="button" value="FALSE" {{($questions[$index]->true_false=='0')}}  class="btn btn-lg btn-block" style="background-color:#904B4E">
+                        <button value="0" class="btn btn-lg btn-block" style="background-color:#904B4E">FALSE</button>
                         <br>
                         @elseif (($questions[$index]->question_type) == 'shan' || ($questions[$index]->question_type) == 'c')
                         <label for="answer" class="font-weight-bold">Your Answer</label>
@@ -89,11 +90,26 @@
             </div>
             @php $index++; @endphp
         @endforeach
+        <div id="hi"></div>
     @else
         <p>No posts found</p>
     @endif
 </div>
-    
+
+<script>
+function getMulti(){
+var getMultiple = document.getElementById("choice1").value;
+
+jQuery.ajax({
+    url: "{{ url('/lobby/check') }}",
+    method: 'post',
+    data: {choice1:getMultiple},
+    success: function(result){
+       console.log(result);
+    }});
+}
+</script>
+
 <script>
 var timeleft = document.getElementById("value0").value;
 timerCount();
@@ -101,7 +117,7 @@ function timerCount(){
     var downloadTimer = setInterval(function(){
         document.getElementById("seconds").innerHTML = timeleft;
         timeleft -= 1;
-        if(timeleft <= 0){
+        if(timeleft == 0){
             loopBox();
         clearInterval(downloadTimer);
         document.getElementById("seconds").innerHTML = ""
