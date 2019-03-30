@@ -92,7 +92,13 @@
         @endforeach
         <div id="hi"></div>
     @else
-        <p>No posts found</p>
+    <div class="container">
+        <div class="jumbotron jumbotron-fluid border border-danger m-5">
+          <div class="container">
+            <h1 class="display-4 font-weight-bold text-center ">WAITING .....</h1>
+          </div>
+        </div>
+    </div>
     @endif
 </div>
 

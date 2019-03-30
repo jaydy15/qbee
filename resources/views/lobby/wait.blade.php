@@ -10,7 +10,7 @@
         {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
         <!-- <button type="button" onclick="getPin()">Enter</button> -->
     {!! Form::close() !!}
-
+    <a href="/lobby/index/in" class="btn btn-warning">Start Quiz</a>
 
 <!-- <script>
 function getPin() {
