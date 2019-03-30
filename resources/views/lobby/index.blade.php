@@ -11,4 +11,6 @@
   </div>
 </div>
 </div>
+<a href="/lobby/index/{{$quiz->id}}/start" class="btn btn-warning">Start Quiz</a>
+<a href="/lobby/index/{{$quiz->id}}/end" class="btn btn-warning">End Quiz</a>
 @endsection

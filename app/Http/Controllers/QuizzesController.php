@@ -65,7 +65,7 @@ class QuizzesController extends Controller
         $quiz ->category = $request -> input('category');
         $quiz ->description = $request -> input('description');
 
-        $quiz->game_pin = $random = Keygen::numeric(8)->prefix(mt_rand(1,9))->generate(true);
+        $quiz->game_pin = $random = Keygen::numeric(5)->prefix(mt_rand(1,9))->generate(true);
         $quiz->user_id = auth()->user()->id;
         $quiz ->save();
 

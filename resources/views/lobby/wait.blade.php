@@ -10,7 +10,7 @@
         {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
         <!-- <button type="button" onclick="getPin()">Enter</button> -->
     {!! Form::close() !!}
-
+   
 
 <!-- <script>
 function getPin() {
