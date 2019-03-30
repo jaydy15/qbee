@@ -4,8 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\DB;
 use App\Quiz;
 use App\Question;
-use App\Game;
-use Illuminate\Http\Request;
+use App\Game;use Illuminate\Http\Request;
 use Keygen;
 
 class lobbyController extends Controller
@@ -13,8 +12,7 @@ class lobbyController extends Controller
     public function index($id)
     {
         $quiz = Quiz::find($id);
-        $questions = DB::table('questions')->where('quiz_id','=', $id)->update(['status' => 1]);
-        return view('lobby.index')->with('quiz', $quiz);
+        $questions = DB::table('questions')->where('quiz_id','=', $id)->update(['status' => 1]);        return view('lobby.index')->with('quiz', $quiz);
     }
 
     public function statusupdate(Request $request, $id){
@@ -37,17 +35,11 @@ class lobbyController extends Controller
     }
 
 
-    public function savedata(){
-        
-    }
-
-
     public function joinquiz(Request $request)
     {
         try{
-            $gamepin = $request->input('game_pin');
-            
-            $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
+
+                        $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
             if($gamepin == '' ){
                 return view('lobby.wait');
             }
@@ -68,5 +60,11 @@ class lobbyController extends Controller
             
             return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions)->with('gamepin', $gamepin);
        
+    }
+    public function check()
+    {
+        $check = getMultiple;
+
+        return view('lobby.question')->with('result', $check);
     }
 }

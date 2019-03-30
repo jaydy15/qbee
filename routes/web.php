@@ -18,7 +18,7 @@ Route::view('/quizzes/{{$quiz->id}}/show', 'show');
 Route::resource('questions', 'QuestionsController');
 
 Auth::routes();
-
+Route::post('/lobby/check', 'lobbyController@check');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::post('questions/store/{id}', 'QuestionsController@store');
 Route::get('/wait', 'lobbyController@lobby')->name('wait');
@@ -29,4 +29,3 @@ Route::get('/lobby/index/{id}', 'lobbyController@index');
 Route::put('/lobby/question', 'lobbyController@joinquiz');
 Route::get('/lobby/index/{id}/start', 'lobbyController@statusupdate');
 Route::get('/lobby/index/{id}/end', 'lobbyController@statusupdate0');
-
