@@ -38,33 +38,27 @@ class lobbyController extends Controller
     public function joinquiz(Request $request)
     {
         try{
-
-                        $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
-            if($gamepin == '' ){
+            $gamepin = $request->input('game_pin');
+            $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
+            if($gamepin == '' )
+            {
                 return view('lobby.wait');
             }
-            
             $quiz_id = json_decode(json_encode($game_pin), true);
-            $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->get();
-
+            $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->where('status', '=', '1')->get();
             // //saving data to database
-            $game= new Game;
-            $game ->game_pin = $gamepin;
-            $game ->quiz_id = (int)$quiz_id;
-            $game ->user_id = auth()->user()->id;
-            $game->save();
+                    $game= new Game;
+                    $game ->game_pin = $gamepin;
+                    $game ->quiz_id = (int)$quiz_id;
+                    $game ->user_id = auth()->user()->id;
+                    $game->save();
         }
-        catch(\Exception $e){
+        catch(\Exception $e)
+        {
             return redirect('/wait')->with('success', 'Lobby not found');
         }
             
-            return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions)->with('gamepin', $gamepin);
-       
-    }
-    public function check()
-    {
-        $check = getMultiple;
-
-        return view('lobby.question')->with('result', $check);
+        return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions)->with('gamepin', $gamepin);
     }
 }
+
