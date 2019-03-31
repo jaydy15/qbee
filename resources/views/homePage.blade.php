@@ -102,6 +102,7 @@
 </head>
 <body>
 @include('inc.navbar')
+@include('inc.messages')
   <div class="pimg1">
     <div class="ptext">
       <span class="border">

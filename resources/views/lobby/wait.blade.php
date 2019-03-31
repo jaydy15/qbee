@@ -8,7 +8,6 @@
             {{Form::text('game_pin','',['class'=> 'form-control', 'placeholder' => ''])}}
         </div>
         {{Form::submit('Submit', ['class' => 'btn btn-success'])}}
-        <!-- <button type="button" onclick="getPin()">Enter</button> -->
     {!! Form::close() !!}
 
 <!-- <script>

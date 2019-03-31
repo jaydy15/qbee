@@ -40,25 +40,26 @@ class lobbyController extends Controller
         try{
             $gamepin = $request->input('game_pin');
             $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
+            
             if($gamepin == '' )
             {
                 return view('lobby.wait');
             }
-            $quiz_id = json_decode(json_encode($game_pin), true);
+            $quiz_id = $game_pin->implode('id', ', ');
             $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->where('status', '=', '1')->get();
             // //saving data to database
                     $game= new Game;
                     $game ->game_pin = $gamepin;
-                    $game ->quiz_id = (int)$quiz_id;
+                    $game ->quiz_id = $game_pin->implode('id', ', ');
                     $game ->user_id = auth()->user()->id;
                     $game->save();
         }
         catch(\Exception $e)
         {
-            return redirect('/wait')->with('success', 'Lobby not found');
+            return redirect('/wait')->with('error', 'Lobby not found');
         }
-            
-        return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions)->with('gamepin', $gamepin);
+
+        return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions)->with('gamepin', $gamepin)->with('quiz_id',$quiz_id)->with('game_pin',$game_pin);
     }
 }
 
