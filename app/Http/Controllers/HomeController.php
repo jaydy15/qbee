@@ -41,24 +41,13 @@ class HomeController extends Controller
     //get date
         $games = DB::table('games')->where('user_id', '=', $user_id)->get();
 
-    //get quiz
-        $quizid = DB::table('games')->select('quiz_id')->where('user_id','=',$user_id)->get();
-        $quiz_id =  $quizid->implode('quiz_id',',');
-        $id = json_decode(($quiz_id), true);
-        
-        $quizzes = DB::table('quizzes')->where('id','=' ,$id)->get();
 
-    // //get na
-    //     $getname = DB::table('quizzes')->select('user_id')->where('id','=' ,$quiz_id)->get();
-    //     $nameid =  json_decode(json_encode($getname), true); 
-    //     $names = DB::table('users')->where('id','=',$nameid)->get();
-        
         }
         catch(\Exception $e)
         {
             return redirect('home')->with('error', 'No history yet');
         }
 
-        return view('profile.quizhis')->with('quizzes', $user->posts)->with('games',$games)->with('quizzes',$quizzes)->with('quizid',$quizid)->with('quiz_id',$quiz_id)->with('id',$id);
+        return view('profile.quizhis')->with('games',$games);
     }
 }

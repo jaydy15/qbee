@@ -1,6 +1,4 @@
-{{$quizid}}
-{{$quiz_id}}
-{{$id}}
+
 
 @extends('layout.app')
 
@@ -15,13 +13,15 @@
             <th>Hosted By</th>
         </tr>
         @foreach ($games as $game)
-        @foreach ($quizzes as $quiz)
+      
         <tr>
             <td>{{$game->created_at}}</td>
-            <td>{{$quiz->title}}</td>
+            <td>{{$game->quiztitle}}</td>
+            <td>{{$game->quizauthor}}</td>
+
         </tr>
         @endforeach
-        @endforeach
+ 
     </table>
 </div>
 

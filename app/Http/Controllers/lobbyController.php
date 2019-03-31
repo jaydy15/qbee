@@ -37,7 +37,7 @@ class lobbyController extends Controller
 
     public function joinquiz(Request $request)
     {
-        try{
+        
             $gamepin = $request->input('game_pin');
             $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
             
@@ -46,18 +46,20 @@ class lobbyController extends Controller
                 return view('lobby.wait');
             }
             $quiz_id = $game_pin->implode('id', ', ');
+            $quiztitle = DB::table('quizzes')->select('title')->where('id','=',$quiz_id)->get();
+            $quizauthorid = DB::table('quizzes')->select('user_id')->where('id','=',$quiz_id)->get();
+            $id = $quizauthorid->implode('user_id','');
+            $quizauthor = DB::table('users')->select('name')->where('id','=',$id)->get();
             $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->where('status', '=', '1')->get();
             // //saving data to database
                     $game= new Game;
                     $game ->game_pin = $gamepin;
                     $game ->quiz_id = $game_pin->implode('id', ', ');
+                    $game ->quiztitle = $quiztitle->implode('title','');
+                    $game ->quizauthor = $quizauthor->implode('name','');
                     $game ->user_id = auth()->user()->id;
                     $game->save();
-        }
-        catch(\Exception $e)
-        {
-            return redirect('/wait')->with('error', 'Lobby not found');
-        }
+       
 
         return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions)->with('gamepin', $gamepin)->with('quiz_id',$quiz_id)->with('game_pin',$game_pin);
     }
