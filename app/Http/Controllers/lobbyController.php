@@ -37,7 +37,7 @@ class lobbyController extends Controller
 
     public function joinquiz(Request $request)
     {
-        
+      
             $gamepin = $request->input('game_pin');
             $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
             
@@ -59,7 +59,8 @@ class lobbyController extends Controller
                     $game ->quizauthor = $quizauthor->implode('name','');
                     $game ->user_id = auth()->user()->id;
                     $game->save();
-       
+     
+
 
         return view('lobby.question')->with('game_pin', $game_pin)->with('questions',$questions)->with('gamepin', $gamepin)->with('quiz_id',$quiz_id)->with('game_pin',$game_pin);
     }

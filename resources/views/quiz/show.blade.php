@@ -6,7 +6,7 @@
     <div>
 
         <p>{{$quiz->category}}</p>
-        <a href="" class="btn btn-info" data-toggle="modal" data-target="#createmodal">Add Question</a>
+        
     
     <div class="container">
       <table class="table table-striped">
@@ -171,7 +171,10 @@
             <!-- end of modal delete -->
 
     </div>
-
+    <a href="" class="btn btn-info" data-toggle="modal" data-target="#createmodal">Add Question</a>
+    <br>
+    <br>
+    <br>
     <a href="/lobby/index/{{$quiz->id}}" class="btn btn-warning">Generate Lobby</a>
     <hr>
 

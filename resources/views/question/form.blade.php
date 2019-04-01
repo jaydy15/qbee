@@ -5,7 +5,7 @@
         <!-- Form -->
         <div class="form-group">
             <label for="question">Question</label>
-            <input class="form-control" placeholder="Question" name="question" type="text" value="{{$question->question}}" id="question">
+            <input class="form-control" placeholder="Question" name="question" type="textarea" value="{{$question->question}}" id="question">
         </div>
 
         <div class="form-group">
