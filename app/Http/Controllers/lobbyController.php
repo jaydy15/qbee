@@ -12,7 +12,8 @@ class lobbyController extends Controller
     public function index($id)
     {
         $quiz = Quiz::find($id);
-        $questions = DB::table('questions')->where('quiz_id','=', $id)->update(['status' => 1]);        return view('lobby.index')->with('quiz', $quiz);
+        $questions = DB::table('questions')->where('quiz_id','=', $id);        
+        return view('lobby.index')->with('quiz', $quiz);
     }
 
     public function statusupdate(Request $request, $id){
