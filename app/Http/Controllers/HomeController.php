@@ -29,7 +29,7 @@ class HomeController extends Controller
     {
         $user_id = auth()->user()->id;
         $user = User::find($user_id);
-        return view('home')->with('quizzes', $user->posts);
+        return view('home')->with('quizzes', $user->posts)->with('user',$user);
     }
 
     public function joinedquiz()

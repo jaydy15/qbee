@@ -30,3 +30,5 @@ Route::put('/lobby/question', 'lobbyController@joinquiz');
 Route::get('/lobby/index/{id}/start', 'lobbyController@statusupdate');
 Route::get('/lobby/index/{id}/end', 'lobbyController@statusupdate0');
 Route::get('/profile/join', 'HomeController@joinedquiz');
+
+Route::resource('users', 'UsersController');
