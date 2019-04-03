@@ -30,6 +30,7 @@
          font-size: 16px;
      }
 </style>
+<link href="{{asset('css/customCss.css')}}" rel="stylesheet" type="text/css">
 
 
  @if(count($questions) > 0)
@@ -117,11 +118,11 @@
  <!-- modal -->
 <div id="openModal" class="modal">
  <div class="modal-content">
-     <div class="modal-body" style="background-color:green;">
-        <div id="hiddenPoints" value=""></div>
+     <div class="modal-body" style="background:linear-gradient(to right, #348f50, #56b4d3);">
+        <div class="hiddenPoints" value=""></div>
 
          <div>Total Points: </div>
-         <div id="totalPoints"></div>
+         <div class="totalPoints"></div>
      </div>
  </div>
 </div>
@@ -130,11 +131,11 @@
   <!-- modal -->
 <div id="openModalWrong" class="modal">
  <div class="modal-content">
-     <div class="modal-body" style="background-color:red;">
-        <div id="hiddenPoints" value=""></div>
+     <div class="modal-body" style="background:linear-gradient(to right, #c31432, #240b36);">
+        <div class="hiddenPoints" value=""></div>
 
          <div>Total Points: </div>
-         <div id="totalPointsWrong"></div>
+         <div class="totalPoints"></div>
      </div>
  </div>
 </div>
@@ -146,7 +147,7 @@ function totalPoints(getPoInt){
  totalPoint = totalPoint + getPoInt;
 
 console.log("totalPoints " + totalPoint);
-$('#totalPoints').html(totalPoint);
+$('.totalPoints').html(totalPoint);
 
 }
 </script>
@@ -169,12 +170,12 @@ var getMultiple1 = button.id;
 if (getMultiple1 == getAns){
  //    console.log("nextq" + nextQ);
  var getPoInt = parseInt(getPo);
-    $('#hiddenPoints').html(getPoInt);
+    $('.hiddenPoints').html(getPoInt);
     totalPoints(getPoInt);
 
 }
 else {
-    $('#hiddenPoints').html(0);
+    $('.hiddenPoints').html(0);
     totalPoints(0);
 }
 document.getElementById("1").disabled = true;
@@ -187,11 +188,11 @@ function getTrue(button){
 var getTrufalAns1 = button.id;
 if (getTrufalAns1 == getTrufal){
    var getPoInt = parseInt(getPo);
-    $('#hiddenPoints').html(getPoInt);
+    $('.hiddenPoints').html(getPoInt);
     totalPoints(getPoInt);
 }
 else{
-    $('#hiddenPoints').html(0);
+    $('.hiddenPoints').html(0);
     totalPoints(0);
 }
 document.getElementById("1").disabled = true;
@@ -206,11 +207,11 @@ var getInputAns = $("#answerInput" + index).val();
 alert(getInputAns);
 if (getInputAns == getShorAns){
  var getPoInt = parseInt(getPo);
-    $('#hiddenPoints').html(getPoInt);
+    $('.hiddenPoints').html(getPoInt);
     totalPoints(getPoInt);
 }
 else {
-    $('#hiddenPoints').html(0);
+    $('.hiddenPoints').html(0);
     totalPoints(0);
 }
 }
@@ -224,7 +225,8 @@ var downloadTimer = setInterval(function(){
   document.getElementById("seconds").innerHTML = timeleft;
   timeleft -= 1;
   if(timeleft == 0){
-    var wrong = document.getElementById("hiddenPoints").innerHTML;
+
+    var wrong = $(".hiddenPoints").text();
 
       console.log("wrong val " + wrong);
       if (wrong == 0){
@@ -250,6 +252,7 @@ var downloadTimer = setInterval(function(){
   document.getElementById("seconds").innerHTML = ""
   }
 }, 1000);
+$('.hiddenPoints').html(0);
 }
 </script>
 
