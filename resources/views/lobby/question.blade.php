@@ -123,12 +123,12 @@
      <div class="jumbotron jumbotron-fluid border border-danger m-5">
             <div class="container">
                 <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
-                <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                <div class="swal2-success-circular-line-left" style="background-color:background:linear-gradient(to right, #348f50, #56b4d3);"></div>
                 <span class="swal2-success-line-tip"></span>
                 <span class="swal2-success-line-long"></span>
                 <div class="swal2-success-ring"></div> 
-                <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
-                <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                <div class="swal2-success-fix" style="background-color:background:linear-gradient(to right, #348f50, #56b4d3);"></div>
+                <div class="swal2-success-circular-line-right" style="background:linear-gradient(to right, #348f50, #56b4d3);"></div>
                 </div>
             <div class="display-4 font-weight-bold text-center" value="">Points: <span class="hiddenPoints"> </div>
             <div class="display-4 font-weight-bold text-center">Total Points: <span class="totalPoints"></div>
