@@ -19,7 +19,8 @@ class lobbyController extends Controller
     public function statusupdate(Request $request, $id){
         $quiz = Quiz::find($id);
         $questions = DB::table('questions')->where('quiz_id', '=', $id)->update(['status'=>1]);
-        return view ('lobby.test')->with('quiz', $quiz);
+        $questions = DB::table('questions')->where('quiz_id', '=', $id)->get();
+        return view ('lobby.test')->with('quiz', $quiz)->with('questions',$questions);
 
     }
 
@@ -40,15 +41,16 @@ class lobbyController extends Controller
     {
       
             $gamepin = $request->input('game_pin');
+            //get quiz id
             $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
             
             if($gamepin == '' )
             {
                 return view('lobby.wait');
             }
-            $quiz_id = $game_pin->implode('id', ', ');
-            $quiztitle = DB::table('quizzes')->select('title')->where('id','=',$quiz_id)->get();
-            $quizauthorid = DB::table('quizzes')->select('user_id')->where('id','=',$quiz_id)->get();
+            $quiz_id = $game_pin->implode('id', ', ');//quiz id #
+            $quiztitle = DB::table('quizzes')->select('title')->where('id','=',$quiz_id)->get();//quiz title
+            $quizauthorid = DB::table('quizzes')->select('user_id')->where('id','=',$quiz_id)->get();//quiz user name
             $id = $quizauthorid->implode('user_id','');
             $quizauthor = DB::table('users')->select('name')->where('id','=',$id)->get();
             $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->where('status', '=', '1')->get();
