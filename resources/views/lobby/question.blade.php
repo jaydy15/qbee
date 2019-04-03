@@ -117,12 +117,23 @@
 
  <!-- modal -->
 <div id="openModal" class="modal">
- <div class="modal-content">
+ <div class="modal-content"  style="background:linear-gradient(to right, #348f50, #56b4d3);">
      <div class="modal-body" style="background:linear-gradient(to right, #348f50, #56b4d3);">
-        <div class="hiddenPoints" value=""></div>
-
-         <div>Total Points: </div>
-         <div class="totalPoints"></div>
+     <div class="jumbotron jumbotron-fluid border border-danger m-5">
+            <div class="container">
+                <div class="swal2-icon swal2-success swal2-animate-success-icon" style="display: flex;">
+                <div class="swal2-success-circular-line-left" style="background-color: rgb(255, 255, 255);"></div>
+                <span class="swal2-success-line-tip"></span>
+                <span class="swal2-success-line-long"></span>
+                <div class="swal2-success-ring"></div> 
+                <div class="swal2-success-fix" style="background-color: rgb(255, 255, 255);"></div>
+                <div class="swal2-success-circular-line-right" style="background-color: rgb(255, 255, 255);"></div>
+                </div>
+            <div class="display-4 font-weight-bold text-center" value="">Points: <span class="hiddenPoints"> </div>
+            <div class="display-4 font-weight-bold text-center">Total Points: <span class="totalPoints"></div>
+              
+            </div>
+        </div>
      </div>
  </div>
 </div>
@@ -130,13 +141,17 @@
 
   <!-- modal -->
 <div id="openModalWrong" class="modal">
- <div class="modal-content">
+ <div class="modal-content"  style="background:linear-gradient(to right, #c31432, #240b36);">
      <div class="modal-body" style="background:linear-gradient(to right, #c31432, #240b36);">
-        <div class="hiddenPoints" value=""></div>
-
-         <div>Total Points: </div>
-         <div class="totalPoints"></div>
-     </div>
+        <div class="jumbotron jumbotron-fluid border border-danger m-5">
+            <div class="container">
+                <div class="swal2-icon swal2-error swal2-animate-error-icon" style="display: flex;"><span class="swal2-x-mark"><span class="swal2-x-mark-line-left"></span><span class="swal2-x-mark-line-right"></span></span></div>
+                <div class="display-4 font-weight-bold text-center" value="">Points: <span class="hiddenPoints"> </div>
+                <div class="display-4 font-weight-bold text-center">Total Points: <span class="totalPoints"></div>
+              
+            </div>
+        </div>
+    </div>
  </div>
 </div>
  <!-- end modal -->
