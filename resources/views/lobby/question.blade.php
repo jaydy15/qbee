@@ -66,33 +66,34 @@
                     <table class="table">
                      <tbody>
                          <tr>
-                         <td><button value="1" id="1" onclick="getMulti1(this);" class="btn btn-lg btn-block" style="background-color:#779ecb">{{$questions[$index]->choice1}}</button></td>
-                         <td><button value="2" id="2" onclick="getMulti1(this);" class="btn btn-lg btn-block" style="background-color:#ff6961">{{$questions[$index]->choice2}}</button></td>
+                         <td><button value="1" id="1" onclick="getMulti1(this);" class="btn btn-lg btn-block functionButton" style="background-color:#779ecb">{{$questions[$index]->choice1}}</button></td>
+                         <td><button value="2" id="2" onclick="getMulti1(this);" class="btn btn-lg btn-block functionButton" style="background-color:#ff6961">{{$questions[$index]->choice2}}</button></td>
                          </tr>
 
                          <tr>
-                         <td><button value="3" id="3" onclick="getMulti1(this);" class="btn btn-lg btn-block" style="background-color:#cb99c9">{{$questions[$index]->choice3}}</button></td>
-                         <td><button value="4" id="4" onclick="getMulti1(this);" class="btn btn-lg btn-block" style="background-color:#77dd77">{{$questions[$index]->choice4}}</button></td>
+                         <td><button value="3" id="3" onclick="getMulti1(this);" class="btn btn-lg btn-block functionButton" style="background-color:#cb99c9">{{$questions[$index]->choice3}}</button></td>
+                         <td><button value="4" id="4" onclick="getMulti1(this);" class="btn btn-lg btn-block functionButton" style="background-color:#77dd77">{{$questions[$index]->choice4}}</button></td>
                          </tr>
                      </tbody>
                      </table>
 
                      @elseif (($questions[$index]->question_type) == 'tf' || ($questions[$index]->question_type) == 'b')
 
-                     <button value="1" id="1" class="btn btn-lg btn-block" onclick="getTrue(this);" style="background-color:#A0BABD">TRUE</button>
+                     <button value="1" id="1" class="btn btn-lg btn-block functionButton" onclick="getTrue(this);" style="background-color:#A0BABD">TRUE</button>
                      <br>
-                     <button value="0" id="0" class="btn btn-lg btn-block" onclick="getTrue(this);" style="background-color:#904B4E">FALSE</button>
+                     <button value="0" id="0" class="btn btn-lg btn-block functionButton" onclick="getTrue(this);" style="background-color:#904B4E">FALSE</button>
                      <br>
                      @elseif (($questions[$index]->question_type) == 'shan' || ($questions[$index]->question_type) == 'c')
                      <label for="answer" class="font-weight-bold">Your Answer</label>
                      <input type="text"  id="answerInput{{$index}}" class="form-control" value="">
 
-                     <button onclick="getAnswer({{$index}});" class="btn btn-success mt-3 ">enter</button>
+                     <button onclick="getAnswer({{$index}});" class="btn btn-success mt-3 functionButton">enter</button>
                     @endif
 
                  </div>
              </div>
          </div>
+
          @php $index++; @endphp
      @endforeach
      <div id="hi"></div>
@@ -170,33 +171,30 @@ var getMultiple1 = button.id;
 if (getMultiple1 == getAns){
  //    console.log("nextq" + nextQ);
  var getPoInt = parseInt(getPo);
+ 
     $('.hiddenPoints').html(getPoInt);
-    totalPoints(getPoInt);
-
-}
-else {
-    $('.hiddenPoints').html(0);
-    totalPoints(0);
-}
-document.getElementById("1").disabled = true;
-document.getElementById("2").disabled = true;
-document.getElementById("3").disabled = true;
-document.getElementById("4").disabled = true;
+        totalPoints(getPoInt);
+    }
+    else {
+        $('.hiddenPoints').html(0);
+        totalPoints(0);
+    }
+$('.functionButton').prop('disabled', true);
 }
 
 function getTrue(button){
 var getTrufalAns1 = button.id;
-if (getTrufalAns1 == getTrufal){
-   var getPoInt = parseInt(getPo);
-    $('.hiddenPoints').html(getPoInt);
-    totalPoints(getPoInt);
-}
-else{
-    $('.hiddenPoints').html(0);
-    totalPoints(0);
-}
-document.getElementById("1").disabled = true;
-document.getElementById("0").disabled = true;
+
+    if (getTrufalAns1 == getTrufal){
+    var getPoInt = parseInt(getPo);
+        $('.hiddenPoints').html(getPoInt);
+        totalPoints(getPoInt);
+    }
+    else{
+        $('.hiddenPoints').html(0);
+        totalPoints(0);
+    }
+$('.functionButton').prop('disabled', true);
 }
 </script>
 
@@ -204,16 +202,16 @@ document.getElementById("0").disabled = true;
 function getAnswer(index){
 var getInputAns = $("#answerInput" + index).val();
 
-alert(getInputAns);
-if (getInputAns == getShorAns){
- var getPoInt = parseInt(getPo);
-    $('.hiddenPoints').html(getPoInt);
-    totalPoints(getPoInt);
-}
-else {
-    $('.hiddenPoints').html(0);
-    totalPoints(0);
-}
+    if (getInputAns == getShorAns){
+    var getPoInt = parseInt(getPo);
+        $('.hiddenPoints').html(getPoInt);
+        totalPoints(getPoInt);
+    }
+    else {
+        $('.hiddenPoints').html(0);
+        totalPoints(0);
+    }
+$('.functionButton').prop('disabled', true);
 }
 </script>
 
@@ -245,14 +243,11 @@ var downloadTimer = setInterval(function(){
       }
        
   clearInterval(downloadTimer);
-  document.getElementById("1").disabled = FALSE;
-  document.getElementById("2").disabled = FALSE;
-  document.getElementById("3").disabled = FALSE;
-  document.getElementById("4").disabled = FALSE;
   document.getElementById("seconds").innerHTML = ""
   }
 }, 1000);
 $('.hiddenPoints').html(0);
+$('.functionButton').prop('disabled', false);
 }
 </script>
 
