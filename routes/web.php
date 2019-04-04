@@ -31,5 +31,6 @@ Route::POST('/lobby/question/end', 'lobbyController@results');
 Route::get('/lobby/index/{id}/start', 'lobbyController@statusupdate');
 Route::get('/lobby/index/{id}/end', 'lobbyController@statusupdate0');
 Route::get('/profile/join', 'HomeController@joinedquiz');
+Route::get('/getExport', 'ExcelController@getExport');
 
 Route::resource('users', 'UsersController');

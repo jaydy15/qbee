@@ -7,6 +7,8 @@
 
 <div class="container">
 @if(count($games)>0)
+
+<a href="{{URL::to('getExport')}}" class="btn btn-success">Export</a>
     <table class="table">
         <tr class="table-warning">
             <th>Date Joined</th>
