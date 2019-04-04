@@ -12,12 +12,14 @@
             <th>Date Joined</th>
             <th>Quiz Title</th>
             <th>Hosted By</th>
+            <th>Score Acquired</th>
         </tr>
         @foreach ($games as $game)
         <tr>
             <td>{{$game->created_at}}</td>
             <td>{{$game->quiztitle}}</td>
             <td>{{$game->quizauthor}}</td>
+            <td>{{$game->total_score}}</td>
         </tr>
         @endforeach
     </table>

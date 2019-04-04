@@ -126,11 +126,16 @@
      <div class="modal-body" style="background:linear-gradient(to right, #348f50, #56b4d3);">
      <div class="jumbotron jumbotron-fluid border border-danger m-5">
             <div class="container">
-            {!! Form::open(['action' => 'lobbyController@joinquiz', 'method'=>'POST', 'enctype'=>'multipart/data']) !!}
-            <input type="hidden" id="total_score" class="score" value="">
+            {!! Form::open(['action' => 'lobbyController@results', 'method'=>'POST', 'enctype'=>'multipart/data']) !!}
+        
+        
+            <div class="form-group">
+            {{Form::label('comment', 'Comment')}}
+            {{Form::text('comment', '', ['class' => 'form-control', 'placeholder' => ''])}}
+            </div>
 
-            <div><label for="comment" class="font-weight-bold">Comment: </label></div>
-            <textarea type="text" id="comment" value=""></textarea>
+            {{ Form::hidden('total_score', '', array('id' => 'total_score' ,'class' => 'score' )) }}
+            {{ Form::hidden('game_pin',$gamepin) }}
 
             <div><label for="reaction" class="font-weight-bold">Reaction: </label></div>
             <div><label for="reactionSentence" class="font-weight-bold">5 is the lowest and 1 is the highest </label></div>
