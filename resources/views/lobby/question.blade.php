@@ -34,15 +34,7 @@
 
 
  @if(count($questions) > 0)
-<div class="container text-center">
- <h1>Countdown Timer</h1>
-     <div id="clockdiv">
-         <div>
-             <span id="seconds"></span>
-             <div class="smalltext">Seconds</div>
-         </div>
-     </div>
-</div>
+
 
 <div id="box">
      @php $index = 0; $hideClass = ""; @endphp
@@ -51,6 +43,18 @@
          $hideClass = "d-none";
      }
      @endphp
+
+
+    <div class="container text-center {{$hideClass}}">
+        <h1>Countdown Timer</h1>
+            <div id="clockdiv">
+                <div>
+                    <span id="seconds"></span>
+                    <div class="smalltext">Seconds</div>
+                </div>
+            </div>
+    </div>
+
          <div class="question card border-info mb-3 mt-3 {{$hideClass}}" id="q{{$index}}" style="border-color:red !important;">
              <div class="row p-3">
                  <div class="col-md-8 col-sm-8 ">
@@ -93,10 +97,9 @@
                  </div>
              </div>
          </div>
-
          @php $index++; @endphp
      @endforeach
-     <div id="hi"></div>
+
  @else
  <div class="container">
      <div class="jumbotron jumbotron-fluid border border-danger m-5">
@@ -113,7 +116,38 @@
  @endif
 </div>
 
+<!-- input total points -->
 
+
+
+<!-- last modal -->
+<div id="lastModal" class="modal">
+ <div class="modal-content"  style="background:linear-gradient(to right, #348f50, #56b4d3);">
+     <div class="modal-body" style="background:linear-gradient(to right, #348f50, #56b4d3);">
+     <div class="jumbotron jumbotron-fluid border border-danger m-5">
+            <div class="container">
+            {!! Form::open(['action' => 'lobbyController@joinquiz', 'method'=>'POST', 'enctype'=>'multipart/data']) !!}
+            <input type="hidden" id="total_score" class="score" value="">
+
+            <div><label for="comment" class="font-weight-bold">Comment: </label></div>
+            <textarea type="text" id="comment" value=""></textarea>
+
+            <div><label for="reaction" class="font-weight-bold">Reaction: </label></div>
+            <div><label for="reactionSentence" class="font-weight-bold">5 is the lowest and 1 is the highest </label></div>
+                5 {{ Form::radio('reaction', '5')}}
+                4 {{ Form::radio('reaction', '4')}}
+                3 {{ Form::radio('reaction', '3')}}
+                2 {{ Form::radio('reaction', '2')}}
+                1 {{ Form::radio('reaction', '1')}}
+
+            <div>{{Form::submit('Submit', ['class' => 'btn btn-success'])}}</div>
+            {!! Form::close() !!}
+            </div>
+        </div>
+     </div>
+ </div>
+</div>
+ <!-- end modal -->
 
 
  <!-- modal -->
@@ -165,6 +199,7 @@ function totalPoints(getPoInt){
 console.log("totalPoints " + totalPoint);
 $('.totalPoints').html(totalPoint);
 
+$('.score').val(totalPoint);
 }
 </script>
 
@@ -298,6 +333,12 @@ console.log("currentQ: " + currentQ);
             getShorAns = $('#short_answer' + nextQ).val();
             getInputAns = $('#answerInput' + nextQ).val();
             timerCount();
+
+            if(qS.length == nextQ){
+
+                    $('#lastModal').modal();
+
+            }
 }
 </script>
 @endsection
