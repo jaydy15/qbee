@@ -41,13 +41,22 @@ class HomeController extends Controller
     //get date
         $games = DB::table('games')->where('user_id', '=', $user_id)->get();
 
-
+        $quizzes = DB::table('quizzes')->where('user_id', '=', $user_id)->where('status', '=', '1')->get();
         }
         catch(\Exception $e)
         {
             return redirect('home')->with('error', 'No history yet');
         }
 
-        return view('profile.quizhis')->with('games',$games);
+        return view('profile.quizhis')->with('games',$games)->with('quizzes',$quizzes);
+    }
+
+
+    public function hostedquiz($id){
+
+        $games = DB::table('games')->where('quiz_id','=',$id)->get();
+
+        return view('profile.hosted')->with('games',$games);
+
     }
 }

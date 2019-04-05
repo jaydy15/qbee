@@ -13,9 +13,17 @@ class lobbyController extends Controller
 {
     public function index($id)
     {
-        $quiz = Quiz::find($id);
-        $questions = DB::table('questions')->where('quiz_id','=', $id);        
-        return view('lobby.index')->with('quiz', $quiz);
+        
+     
+        $update = DB::table('quizzes')->where('id','=',$id)->update(
+            ['status'=>'1']
+        );
+        $quiz = Quiz::find($id); 
+        $quizzes = DB::table('quizzes')->select('game_pin')->where('id','=',$id);//game pin
+        $questions = DB::table('questions')->where('quiz_id','=', $id);
+        $lobby_user = DB::table('lobby_user')->select('user_id')->where('game_pin','=',$quizzes->implode('game_pin',''))->get();
+        $users = DB::table('users')->where('id','=',$lobby_user->implode('user_id',''))->get();        
+        return view('lobby.index')->with('quiz', $quiz)->with('users',$users);
     }
 
     public function statusupdate(Request $request, $id){
@@ -29,7 +37,7 @@ class lobbyController extends Controller
     public function statusupdate0(Request $request, $id){
         
         $questions = DB::table('questions')->where('quiz_id', '=', $id)->update(['status'=>0]);
-        return view ('lobby.end');
+        return redirect ("/quizzes/{$id}")->with('success',"THANK YOU FOR PLAYING");
 
     }
 
@@ -54,6 +62,7 @@ class lobbyController extends Controller
             $lobbyuser = new LobbyUser;
             $lobbyuser ->user_id = auth()->user()->id;
             $lobbyuser ->quiz_id = $quiz_id;
+            $lobbyuser ->game_pin =$gamepin;
             $lobbyuser ->save();
         return view('lobby.question')->with('questions',$questions)->with('gamepin',$gamepin);
     }
@@ -72,8 +81,8 @@ class lobbyController extends Controller
             // //saving data to database
                     $game = new Game;
                     $game ->quiz_id = $game_pin->implode('id', ', ');
-                    $game ->quiztitle = $quiztitle->implode('title','');
                     $game ->quizauthor = $quizauthor->implode('name','');
+                    $game ->quiztitle = $quiztitle->implode('title','');
                     $game ->user_id = auth()->user()->id;
                     $game ->game_pin = $gamepin;
                     $game ->total_score = $request->input('total_score');
@@ -87,6 +96,14 @@ class lobbyController extends Controller
 
 
         return redirect('home')->with('success', 'Thank You for Playing');
+    }
+
+    public function updatepin($id){
+        $game_pin = $random = Keygen::numeric(5)->prefix(mt_rand(1,9))->generate(true);
+        $quiz = DB::table('quizzes')->where('id', '=', $id)->update(['game_pin'=>$game_pin]);
+        
+
+        return back()->with('success','NEW GAME PIN GENERATED');
     }
 }
 

@@ -11,6 +11,23 @@
   </div>
 </div>
 </div>
+@if(count($users)>0)
+@foreach($users as $user)
+  <table>
+    <tr>
+      {{$user->name}}  
+    </tr> 
+  </table>    
+@endforeach
+@else
+  <p>no user</p>
+@endif
+
 <a href="/lobby/index/{{$quiz->id}}/start" class="btn btn-warning">Start Quiz</a>
 <a href="/lobby/index/{{$quiz->id}}/end" class="btn btn-warning">End Quiz</a>
+<script type="text/javascript">
+  setTimeout(function(){
+      location.reload();
+  },1000);
+</script>
 @endsection

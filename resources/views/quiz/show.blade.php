@@ -176,6 +176,7 @@
     <br>
     <br>
     <a href="/lobby/index/{{$quiz->id}}" class="btn btn-warning">Generate Lobby</a>
+    <a href="/quizzes/{{$quiz->id}}/in" class="btn btn-warning">Refresh Pin</a>
     <hr>
 
 

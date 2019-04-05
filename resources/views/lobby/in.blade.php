@@ -1,1 +1,1 @@
-data saved
+{{$quiz}}

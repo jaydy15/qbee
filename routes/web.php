@@ -30,7 +30,7 @@ Route::get('/homePage', 'homePageController@index')->name('homePage');
 Route::get('/lobby/index/{id}', 'lobbyController@index');
 // Route::get('/lobby/{id}/joinquiz', 'lobbyController@joinquiz');
 Route::put('/lobby/question', 'lobbyController@joinquiz');
-Route::POST('/lobby/question/end', 'lobbyController@results');
+Route::POST('/lobby/question', 'lobbyController@results');
 Route::get('/lobby/index/{id}/start', 'lobbyController@statusupdate');
 Route::get('/lobby/index/{id}/end', 'lobbyController@statusupdate0');
 Route::get('/profile/join', 'HomeController@joinedquiz');
@@ -41,3 +41,6 @@ Route::get('/download', function () {
 });
 
 Route::resource('users', 'UsersController');
+
+Route::get('/history/{id}', 'HomeController@hostedquiz');
+Route::get('/quizzes/{id}/in', 'lobbyController@updatepin');

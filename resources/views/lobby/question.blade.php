@@ -33,6 +33,7 @@
 <link href="{{asset('css/customCss.css')}}" rel="stylesheet" type="text/css">
 
 
+
  @if(count($questions) > 0)
 
 
@@ -101,7 +102,7 @@
      @endforeach
 
  @else
- <div class="container">
+ <div id="reloadquiz" class="container">
      <div class="jumbotron jumbotron-fluid border border-danger m-5">
        <div class="container">
          <h1 class="display-4 font-weight-bold text-center ">WAITING .....</h1>
@@ -111,7 +112,7 @@
  <script type="text/javascript">
    setTimeout(function(){
        location.reload();
-   },10000);
+   },20000);
 </script>
  @endif
 </div>

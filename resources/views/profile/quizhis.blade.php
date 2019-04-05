@@ -9,6 +9,7 @@
 @if(count($games)>0)
 
 <a href="/download" class="btn btn-success">Export</a>
+<h1>Joined Quiz</h1>
     <table class="table">
         <tr class="table-warning">
             <th>Date Joined</th>
@@ -25,8 +26,26 @@
         </tr>
         @endforeach
     </table>
+@endif
+@if(count($quizzes)>0)
+    <h1>Hosted Quiz</h1>
+    <table class="table">
+        <tr class="table-warning">
+            <th>Quiz Title</th>
+            <th>Date Hosted</th>
+            <th>Game Pin </th>
+        </tr>
+        @foreach ($quizzes as $quiz)
+        <tr>
+            <td><a href="/history/{{$quiz->id}}">{{$quiz->title}}</td>
+            <td>{{$quiz->updated_at}}</td>
+            <td>{{$quiz->game_pin}}</td>
+
+        </tr>
+        @endforeach
+    </table>
 @else
-    <p>No History Yet</p>
+    <p>No Hosted Quiz Yet</p>
 @endif
 </div>
 
