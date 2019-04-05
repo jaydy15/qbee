@@ -1,5 +1,8 @@
 <?php
 
+use App\Exports\gameExport;
+use Maatwebsite\Excel\Facades\Excel;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -32,5 +35,9 @@ Route::get('/lobby/index/{id}/start', 'lobbyController@statusupdate');
 Route::get('/lobby/index/{id}/end', 'lobbyController@statusupdate0');
 Route::get('/profile/join', 'HomeController@joinedquiz');
 Route::get('/getExport', 'ExcelController@getExport');
+
+Route::get('/download', function () {
+    return Excel::download(new gameExport, 'game.xlsx');
+});
 
 Route::resource('users', 'UsersController');
