@@ -15,16 +15,17 @@
 @foreach($users as $user)
   <table>
     <tr>
-      {{$user->name}}  
+        <h1 class="display-4 font-weight-bold text-center table-danger">Users</h1>
+        <h1 class="display-4 font-weight-bold text-center table-info">{{$user->name}}</h1>  
     </tr> 
   </table>    
 @endforeach
 @else
-  <p>no user</p>
+<h1 class="display-4 font-weight-bold text-center table-danger">No User</h1> 
 @endif
 
 <a href="/lobby/index/{{$quiz->id}}/start" class="btn btn-warning">Start Quiz</a>
-<a href="/lobby/index/{{$quiz->id}}/end" class="btn btn-warning">End Quiz</a>
+
 <script type="text/javascript">
   setTimeout(function(){
       location.reload();

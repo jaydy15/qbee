@@ -31,7 +31,7 @@
                             <td>{{$quiz->title}}</td>
                             <td><a href="/quizzes/{{$quiz->id}}/edit" class="btn btn-primary">Edit</a></td>
                             <td></td>
-                            <td><a href="/quizzes/{{$quiz->id}}" class="btn btn-secondary">Show</a></td>
+                            <td><a href="/quizzes/{{$quiz->id}}" class="btn btn-secondary">View Questions</a></td>
                             <td>
                                 {!!Form::open(['action' => ['QuizzesController@destroy', $quiz->id], 'method' => 'POST', 'class' => 'pull-right'])!!}
                                     {{Form::hidden('_method', 'DELETE')}}

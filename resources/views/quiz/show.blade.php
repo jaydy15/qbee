@@ -183,7 +183,7 @@
     <small>Written on {{$quiz->created_at}} by {{$quiz->user->name}}</small>
     <hr>
 
-    <a href="/quizzes" class="btn btn-primary">Go Back</a>
+    <a href="/home" class="btn btn-primary">Go Back</a>
 
 
 <script>

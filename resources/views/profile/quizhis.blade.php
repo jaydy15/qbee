@@ -8,7 +8,7 @@
 <div class="container">
 @if(count($games)>0)
 
-<a href="/download" class="btn btn-success">Export</a>
+
 <h1>Joined Quiz</h1>
     <table class="table">
         <tr class="table-warning">

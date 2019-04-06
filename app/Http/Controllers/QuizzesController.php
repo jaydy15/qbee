@@ -69,7 +69,7 @@ class QuizzesController extends Controller
         $quiz->user_id = auth()->user()->id;
         $quiz ->save();
 
-        return redirect('/quizzes');
+        return redirect('/home');
     }
 
     /**
@@ -119,30 +119,16 @@ class QuizzesController extends Controller
             'category' => 'required'
         ]);
 
-        // Handle File Upload
-        if($request->hasFile('cover_image')){
-        // Get filename with the extension
-        $filenameWithExt = $request->file('cover_image')->getClientOriginalName();
-        // Get just filename
-        $filename = pathinfo($filenameWithExt, PATHINFO_FILENAME);
-        // Get just ext
-        $extension = $request->file('cover_image')->getClientOriginalExtension();
-        // Filename to store
-        $fileNameToStore= $filename.'_'.time().'.'.$extension;
-        // Upload Image
-        $path = $request->file('cover_image')->storeAs('public/cover_images', $fileNameToStore);
-    }
 
         // Create Post
         $quiz = Quiz::find($id);
         $quiz->title = $request->input('title');
         $quiz->category = $request->input('category');
-        if($request->hasFile('cover_image')){
-            $quiz->cover_image = $fileNameToStore;
-        }
+        $quiz->description = $request->input('description');
+
         $quiz->save();
 
-        return redirect('/quizzes')->with('success', 'Post Updated');
+        return redirect('/home')->with('success', 'Quiz Updated');
     }
 
     /**

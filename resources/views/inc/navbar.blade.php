@@ -10,9 +10,9 @@
               <li class="nav-item active">
                 <a class="nav-link" href="/"><span style="color:red">H</span>ome <span class="sr-only">(current)</span></a>
               </li>
-              <li class="nav-item">
+              {{-- <li class="nav-item">
                 <a class="nav-link" href="/quizzes"><span style="color:red">Q</span>uizzes</a>
-              </li>
+              </li> --}}
 
             </ul>
             <ul class="nav navbar-nav nav-right">
