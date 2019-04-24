@@ -34,7 +34,7 @@
                <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h5 class="modal-title">Create Question</h5>
+                            <h3 class="modal-title">Create Question</h3>
                             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                 <span aria-hidden="true">&times;</span>
                             </button>
@@ -107,6 +107,7 @@
                             </form>
                         </div>
                     </div>
+
                </div>
             <!-- end of modal create -->
 
@@ -174,7 +175,19 @@
     <a href="" class="btn btn-info" data-toggle="modal" data-target="#createmodal">Add Question</a>
     <br>
     <br>
-    <br>
+    <div>
+        <h5>Guideline in Consturcting Good Questions:</h5>
+        <a href="http://www.washington.edu/teaching/teaching-resources/preparing-to-teach/constructing-tests/" target="_blank">
+            Multiple Choice</a>
+            <br>
+            <br>
+        <a href="http://www.studygs.net/teaching/tsttak2a.htm" target="_blank">True or False</a>
+        <br>
+        <br>
+        <a href="https://www.openpolytechnic.ac.nz/current-students/study-tips-and-techniques/studying-for-exams/types-of-exam-questions/" target="_blank">Short Answer</a>
+        <br>
+        <br>
+    </div>
     <a href="/lobby/index/{{$quiz->id}}" class="btn btn-warning">Generate Lobby</a>
     <a href="/quizzes/{{$quiz->id}}/in" class="btn btn-warning">Refresh Pin</a>
     <hr>

@@ -17,11 +17,11 @@ class AddUseridQuizidToQuestions extends Migration
         Schema::table('questions', function (Blueprint $table) {
             $table->integer('user_id')->unsigned();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
 
             $table->integer('quiz_id')->unsigned();
 
-            $table->foreign('quiz_id')->references('id')->on('quizzes');
+            $table->foreign('quiz_id')->references('id')->on('quizzes')->onDelete('cascade');
 
         });
     }

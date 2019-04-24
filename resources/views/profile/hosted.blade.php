@@ -5,7 +5,7 @@
 
 @if(count($games)>0)
 
-<a href="/download" class="btn btn-success">Export</a>
+
 <h1>Hosted Quiz</h1>
     <table class="table">
         <tr class="table-warning">
@@ -13,10 +13,11 @@
             <th>Score</th>
             <th>Comment</th>
             <th>Reaction</th>
+            <th></th>
         </tr>
         @foreach ($games as $game)
         <tr>
-            <td>{{$game->user_id}}</td>
+            <td>{{$game->name}}</td>
             <td>{{$game->total_score}}</td>
             <td>{{$game->comment}}</td>
             <td>{{$game->reaction}}</td>

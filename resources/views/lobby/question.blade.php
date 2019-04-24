@@ -110,6 +110,12 @@
      </div>
  </div>
  <script type="text/javascript">
+    /*window.setInterval(function(){
+        if(localStorage["update"] == "1"){
+            localStorage["update"] = "0";
+            location.reload();
+        }
+    }, 500);*/
    setTimeout(function(){
        location.reload();
    },20000);

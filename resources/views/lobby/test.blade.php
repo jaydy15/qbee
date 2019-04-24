@@ -14,11 +14,11 @@
                 <div class="row">
                     <div class="col-md-8 col-sm-8">
                         <h3><a>{{$question->question}}</a></h3>
-                        <div class="text-right">
+                        {{-- <div class="text-right">
                         <a href="/questions/{{$question->id}}/edit" class="btn btn-primary">Edit</a>
                         <a href="/questions/{{$question->id}}/edit" class="btn btn-primary">Skip</a>
 
-                        </div>
+                        </div> --}}
                         <!-- Question Type -->
                             @if (($question->question_type) == 'mc' || ($question->question_type) == 'a')
                         <div class="container">

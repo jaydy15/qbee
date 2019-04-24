@@ -145,6 +145,7 @@ class QuizzesController extends Controller
         {
             return redirect('/quizzes')->with('error', 'Unauthorized Page');
         }
+        $quiz-> question()->delete();
         $quiz-> delete();
 
         return redirect('/quizzes')->with('success', 'Post Removed');

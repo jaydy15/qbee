@@ -21,9 +21,8 @@ class lobbyController extends Controller
         $quiz = Quiz::find($id); 
         $quizzes = DB::table('quizzes')->select('game_pin')->where('id','=',$id);//game pin
         $questions = DB::table('questions')->where('quiz_id','=', $id);
-        $lobby_user = DB::table('lobby_user')->select('user_id')->where('game_pin','=',$quizzes->implode('game_pin',''))->get();
-        $users = DB::table('users')->where('id','=',$lobby_user->implode('user_id',''))->get();        
-        return view('lobby.index')->with('quiz', $quiz)->with('users',$users);
+        $lobby_users = DB::table('lobby_user')->where('game_pin','=',$quizzes->implode('game_pin',''))->get();     
+        return view('lobby.index')->with('quiz', $quiz)->with('lobby_users',$lobby_users);
     }
 
     public function statusupdate(Request $request, $id){
@@ -49,7 +48,7 @@ class lobbyController extends Controller
 
     public function joinquiz(Request $request)
     {
-        
+     try{   
             $gamepin = $request->input('game_pin');
             //get quiz id
             $game_pin = DB::table('quizzes')->select('id')->where('game_pin', '=', $gamepin)->get('id');
@@ -61,9 +60,15 @@ class lobbyController extends Controller
             $questions = DB::table('questions')->where('quiz_id', '=', $quiz_id)->where('status', '=', '1')->get();
             $lobbyuser = new LobbyUser;
             $lobbyuser ->user_id = auth()->user()->id;
+            $lobbyuser ->user_name = auth()->user()->name;
             $lobbyuser ->quiz_id = $quiz_id;
             $lobbyuser ->game_pin =$gamepin;
             $lobbyuser ->save();
+        }
+        catch (\Exception $e) {
+            return redirect('/wait')->with('error', 'Lobby not found');
+        }
+
         return view('lobby.question')->with('questions',$questions)->with('gamepin',$gamepin);
     }
 
@@ -88,6 +93,7 @@ class lobbyController extends Controller
                     $game ->total_score = $request->input('total_score');
                     $game ->comment = $request->input('comment');
                     $game ->reaction = $request->input('reaction');
+                    $game ->name = auth()->user()->name;
                     $game->save();
         }
         catch (\Exception $e) {

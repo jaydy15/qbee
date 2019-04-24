@@ -40,6 +40,7 @@
             <td><a href="/history/{{$quiz->id}}">{{$quiz->title}}</td>
             <td>{{$quiz->updated_at}}</td>
             <td>{{$quiz->game_pin}}</td>
+            <td><a href="/history/{{$quiz->id}}/download" class="btn btn-primary">Export Results</td>
 
         </tr>
         @endforeach

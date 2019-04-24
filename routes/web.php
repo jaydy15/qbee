@@ -36,7 +36,7 @@ Route::get('/lobby/index/{id}/end', 'lobbyController@statusupdate0');
 Route::get('/profile/join', 'HomeController@joinedquiz');
 Route::get('/getExport', 'ExcelController@getExport');
 
-Route::get('/download', function () {
+Route::get('/history/{id}/download', function () {
     return Excel::download(new gameExport, 'game.xlsx');
 });
 
